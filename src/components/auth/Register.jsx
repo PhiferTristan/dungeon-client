@@ -142,7 +142,7 @@ export const Register = ({ setToken }) => {
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            User Type
+            Do you plan to use this application as a Dungeon Master or Player?
           </label>
           <div className="flex items-center">
             <label className="mr-4">
