@@ -3,9 +3,10 @@ import { ApplicationViews } from "./views/ApplicationViews";
 import { NavBar } from "./components/nav/NavBar";
 
 export const DungeonDocs = () => {
-  const [token, setTokenState] = useState(localStorage.getItem("atuh_token"));
+  const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
   const staff = JSON.parse(localStorage.getItem("staff")); // should be a boolean value
   const currentUserId = JSON.parse(localStorage.getItem("id"));
+  const userType = JSON.parse(localStorage.getItem("userType"));
 
   const setToken = (newToken) => {
     localStorage.setItem("auth_token", newToken);
@@ -21,6 +22,7 @@ export const DungeonDocs = () => {
           setToken={setToken}
           staff={staff}
           currentUserId={currentUserId}
+          userType={userType}
         />
       </div>
     </>
