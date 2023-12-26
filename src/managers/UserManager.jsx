@@ -4,14 +4,14 @@ export const getAllUsers = (token) => {
       Authorization: `Token ${token}`,
       "Content-Type": "application/json",
     },
-  }).then((res) => res.json())
+  }).then((res) => res.json());
 };
 
 export const getUserById = (token, userId) => {
-    return fetch(`http://localhost:8000/users/${userId}`, {
-        headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-        }
-    }).then((res) => res.json())
-}
+  return fetch(`http://localhost:8000/users/${userId}`, {
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json());
+};
