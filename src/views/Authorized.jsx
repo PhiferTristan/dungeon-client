@@ -1,8 +1,14 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export const Authorized = ({ token }) => {
   if (token) {
-    return <Outlet />
+    return <Outlet />;
   }
-  return <Navigate to='/login' replace />
-}
+
+  Authorized.propTypes = {
+    token: PropTypes.string,
+  };
+
+  return <Navigate to="/login" replace />;
+};

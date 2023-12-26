@@ -6,7 +6,7 @@ export const DungeonDocs = () => {
   const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
   const staff = JSON.parse(localStorage.getItem("staff")); // should be a boolean value
   const currentUserId = JSON.parse(localStorage.getItem("id"));
-  const userType = JSON.parse(localStorage.getItem("userType"));
+  const currentUserType = localStorage.getItem("userType");
 
   const setToken = (newToken) => {
     localStorage.setItem("auth_token", newToken);
@@ -16,13 +16,18 @@ export const DungeonDocs = () => {
   return (
     <>
       <div className="h-screen bg-gradient-to-b from-gray-800">
-        <NavBar token={token} setToken={setToken} staff={staff} />
+        <NavBar
+          token={token}
+          setToken={setToken}
+          staff={staff}
+          currentUserType={currentUserType}
+        />
         <ApplicationViews
           token={token}
           setToken={setToken}
           staff={staff}
           currentUserId={currentUserId}
-          userType={userType}
+          currentUserType={currentUserType}
         />
       </div>
     </>

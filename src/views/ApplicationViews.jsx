@@ -2,15 +2,26 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
-import { PlayerHome } from "../components/homepage/PlayerHome";
+import { Homepage } from "../components/homepage/Homepage";
+import PropTypes from "prop-types";
 
 export const ApplicationViews = ({
   token,
   setToken,
-  staff,
+  // staff,
   setStaff,
   currentUserId,
+  currentUserType,
 }) => {
+  ApplicationViews.propTypes = {
+    token: PropTypes.string,
+    setToken: PropTypes.func.isRequired,
+    staff: PropTypes.string,
+    setStaff: PropTypes.function.isRequired,
+    currentUserId: PropTypes.string,
+    currentUserType: PropTypes.string,
+  };
+
   return (
     <>
       <Routes>
@@ -23,7 +34,16 @@ export const ApplicationViews = ({
           element={<Register setToken={setToken} setStaff={setStaff} />}
         />
         <Route element={<Authorized token={token} />}>
-          <Route path="/" element={<PlayerHome setToken={setToken} currentUserId={currentUserId} />} />
+          <Route
+            path="/"
+            element={
+              <Homepage
+                setToken={setToken}
+                currentUserId={currentUserId}
+                currentUserType={currentUserType}
+              />
+            }
+          />
         </Route>
       </Routes>
     </>

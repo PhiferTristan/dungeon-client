@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../managers/AuthManager";
+import PropTypes from "prop-types";
 
 export const Register = ({ setToken }) => {
   const firstName = useRef();
@@ -15,6 +16,7 @@ export const Register = ({ setToken }) => {
   const navigate = useNavigate();
 
   const [userType, setUserType] = useState("");
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   const handleCheckboxChange = (type) => {
     setUserType(type);
@@ -33,19 +35,31 @@ export const Register = ({ setToken }) => {
         bio: bio.current.value,
         profile_image_url: profileImageUrl.current.value,
         discord_username: discordUsername.current.value,
-        user_type: userType
+        user_type: userType,
       };
 
       registerUser(newUser).then((res) => {
         if ("valid" in res && res.valid) {
           setToken(res.token);
-          navigate("/");
+          localStorage.setItem("staff", res.staff);
+          localStorage.setItem("userType", res.user_type);
+          localStorage.setItem("id", res.id);
+          setRegistrationSuccess(true);
         }
       });
     } else {
-      // Implement your own way to handle password mismatch, for example, showing a message.
       console.error("Passwords do not match");
     }
+  };
+
+  useEffect(() => {
+    if (registrationSuccess) {
+      navigate("/");
+    }
+  }, [registrationSuccess, navigate]);
+
+  Register.propTypes = {
+    setToken: PropTypes.func.isRequired,
   };
 
   return (
