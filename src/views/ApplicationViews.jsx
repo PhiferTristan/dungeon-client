@@ -24,28 +24,30 @@ export const ApplicationViews = ({
 
   return (
     <>
-      <Routes>
-        <Route
-          path="/login"
-          element={<Login setToken={setToken} setStaff={setStaff} />}
-        />
-        <Route
-          path="/register"
-          element={<Register setToken={setToken} setStaff={setStaff} />}
-        />
-        <Route element={<Authorized token={token} />}>
+      <div className="h-screen bg-gradient-to-b from-gray-800">
+        <Routes>
           <Route
-            path="/"
-            element={
-              <Homepage
-                setToken={setToken}
-                currentUserId={currentUserId}
-                currentUserType={currentUserType}
-              />
-            }
+            path="/login"
+            element={<Login setToken={setToken} setStaff={setStaff} />}
           />
-        </Route>
-      </Routes>
+          <Route
+            path="/register"
+            element={<Register setToken={setToken} setStaff={setStaff} />}
+          />
+          <Route element={<Authorized token={token} />}>
+            <Route
+              path="/"
+              element={
+                <Homepage
+                  setToken={setToken}
+                  currentUserId={currentUserId}
+                  currentUserType={currentUserType}
+                />
+              }
+            />
+          </Route>
+        </Routes>
+      </div>
     </>
   );
 };

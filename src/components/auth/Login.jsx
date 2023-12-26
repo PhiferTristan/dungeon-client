@@ -7,7 +7,7 @@ export const Login = ({ setToken }) => {
   const username = useRef();
   const password = useRef();
   const navigate = useNavigate();
-  const [isUnsuccessful, setisUnsuccessful] = useState(false);
+  const [isUnsuccessful, setIsUnsuccessful] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ export const Login = ({ setToken }) => {
         localStorage.setItem("id", res.id);
         navigate("/");
       } else {
-        setisUnsuccessful(true);
+        setIsUnsuccessful(true);
       }
     });
 
@@ -37,8 +37,8 @@ export const Login = ({ setToken }) => {
   return (
     <section className="flex items-center justify-center min-h-screen">
       <form className="w-full max-w-sm" onSubmit={handleLogin}>
-        <h1 className="text-3xl font-bold mb-4">Dungeon Docs</h1>
-        <p className="text-lg mb-4">Please sign in</p>
+        <h1 className="text-3xl font-bold mb-4">Welcome to Dungeon Docs</h1>
+        <p className="text-lg mb-4 text-center">Please sign in</p>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -62,9 +62,9 @@ export const Login = ({ setToken }) => {
           />
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-col">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4"
             type="submit"
           >
             Submit
@@ -74,7 +74,7 @@ export const Login = ({ setToken }) => {
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             href="#"
           >
-            Register
+            Do you not have an account? Click here to register!
           </Link>
         </div>
 

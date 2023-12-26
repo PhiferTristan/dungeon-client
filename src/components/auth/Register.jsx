@@ -65,8 +65,8 @@ export const Register = ({ setToken }) => {
   return (
     <section className="flex items-center justify-center min-h-screen">
       <form className="w-full max-w-md" onSubmit={handleRegister}>
-        <h1 className="text-3xl font-bold mb-4">Dungeon Docs</h1>
-        <p className="text-lg mb-4">Create an account</p>
+        <h1 className="text-3xl font-bold mb-4 text-center">Registration Form</h1>
+        <p className="text-lg mb-4 text-center">Create an account</p>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -158,25 +158,29 @@ export const Register = ({ setToken }) => {
           <label className="block text-gray-700 text-sm font-bold mb-2">
             Do you plan to use this application as a Dungeon Master or Player?
           </label>
-          <div className="flex items-center">
-            <label className="mr-4">
-              <input
-                type="checkbox"
-                checked={userType === "DM"}
-                onChange={() => handleCheckboxChange("DM")}
-                className="mr-2"
-              />
-              <span className="text-gray-700 text-sm">Dungeon Master</span>
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={userType === "Player"}
-                onChange={() => handleCheckboxChange("Player")}
-                className="mr-2"
-              />
-              <span className="text-gray-700 text-sm">Player</span>
-            </label>
+          <div className="flex flex-col items-center">
+            <div className="mb-2">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={userType === "DM"}
+                  onChange={() => handleCheckboxChange("DM")}
+                  className="mr-2"
+                />
+                <span className="text-gray-700 text-sm">Dungeon Master</span>
+              </label>
+            </div>
+            <div>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={userType === "Player"}
+                  onChange={() => handleCheckboxChange("Player")}
+                  className="mr-2"
+                />
+                <span className="text-gray-700 text-sm">Player</span>
+              </label>
+            </div>
           </div>
         </div>
 
