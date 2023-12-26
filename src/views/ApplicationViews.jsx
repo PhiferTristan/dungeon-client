@@ -16,8 +16,8 @@ export const ApplicationViews = ({
   ApplicationViews.propTypes = {
     token: PropTypes.string,
     setToken: PropTypes.func.isRequired,
-    staff: PropTypes.string,
-    setStaff: PropTypes.function.isRequired,
+    staff: PropTypes.bool,
+    setStaff: PropTypes.func.isRequired,
     currentUserId: PropTypes.string,
     currentUserType: PropTypes.string,
   };

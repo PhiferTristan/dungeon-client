@@ -65,7 +65,7 @@ export const NavBar = ({
   NavBar.propTypes = {
     token: PropTypes.string,
     setToken: PropTypes.func.isRequired,
-    staff: PropTypes.string,
+    staff: PropTypes.bool,
     currentUserType: PropTypes.string,
   };
 
