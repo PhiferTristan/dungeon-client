@@ -79,7 +79,7 @@ export const Login = ({ setToken }) => {
         </div>
 
         {isUnsuccessful ? (
-          <p className="mt-4 text-red-500">Username or password not valid</p>
+          <p className="mt-4 text-red-500 text-center">Username or password not valid</p>
         ) : (
           ""
         )}
