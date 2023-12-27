@@ -7,8 +7,8 @@ export const getAllUsers = (token) => {
   }).then((res) => res.json());
 };
 
-export const getUserById = (token, userId) => {
-  return fetch(`http://localhost:8000/users/${userId}`, {
+export const getUserById = (token, currentUserId) => {
+  return fetch(`http://localhost:8000/users/${currentUserId}`, {
     headers: {
       Authorization: `Token ${token}`,
       "Content-Type": "application/json",

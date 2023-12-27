@@ -4,6 +4,7 @@ import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { Homepage } from "../components/homepage/Homepage";
 import PropTypes from "prop-types";
+import { MyProfile } from "../components/profile/MyProfile";
 
 export const ApplicationViews = ({
   token,
@@ -17,7 +18,7 @@ export const ApplicationViews = ({
     token: PropTypes.string,
     setToken: PropTypes.func.isRequired,
     staff: PropTypes.bool,
-    setStaff: PropTypes.func.isRequired,
+    setStaff: PropTypes.func,
     currentUserId: PropTypes.string,
     currentUserType: PropTypes.string,
   };
@@ -45,6 +46,9 @@ export const ApplicationViews = ({
                 />
               }
             />
+            <Route path="profiles">
+              <Route path="mine" element={<MyProfile token={token} currentUserId={currentUserId} currentUserType={currentUserType}/>} />
+            </Route>
           </Route>
         </Routes>
       </div>
