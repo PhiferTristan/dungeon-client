@@ -33,6 +33,8 @@ export const EditProfile = ({ token, currentUserId }) => {
     }
   }, [token, currentUserId]);
 
+  console.log(user)
+
   const handleInputChange = (e) => {
     setEditFormData({
       ...editFormData,
