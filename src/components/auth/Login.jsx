@@ -18,11 +18,23 @@ export const Login = ({ setToken }) => {
     };
 
     loginUser(user).then((res) => {
+      console.log(res)
       if ("valid" in res && res.valid) {
         setToken(res.token);
         localStorage.setItem("staff", res.staff);
         localStorage.setItem("userType", res.user_type);
         localStorage.setItem("id", res.id);
+
+        // Check and set playerId if user's user_type is "Player"
+        if (res.user_type === "Player" && "player_user" in res) {
+          localStorage.setItem("playerId", res.player_user.id);
+        }
+
+        // Check and set dungeonMasterId if user's user_type is "DM"
+        if (res.user_type === "DM" && "dungeon_master_user" in res) {
+          localStorage.setItem("dungeonMasterId", res.dungeon_master_user.id);
+        }
+
         navigate("/");
       } else {
         setIsUnsuccessful(true);
@@ -79,7 +91,9 @@ export const Login = ({ setToken }) => {
         </div>
 
         {isUnsuccessful ? (
-          <p className="mt-4 text-red-500 text-center">Username or password not valid</p>
+          <p className="mt-4 text-red-500 text-center">
+            Username or password not valid
+          </p>
         ) : (
           ""
         )}
