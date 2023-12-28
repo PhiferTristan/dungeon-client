@@ -8,6 +8,7 @@ import { MyProfile } from "../components/profiles/MyProfile";
 import { EditProfile } from "../components/profiles/EditProfile";
 import { PlayersList } from "../components/players/PlayersList";
 import { Profile } from "../components/profiles/Profile";
+import { CharactersList } from "../components/characters/CharactersList";
 
 export const ApplicationViews = ({
   token,
@@ -75,6 +76,10 @@ export const ApplicationViews = ({
 
             <Route path="players">
               <Route path="all" element={<PlayersList token={token} />} />
+            </Route>
+
+            <Route path="characters">
+              <Route path="all" element={<CharactersList token={token} />} />
             </Route>
           </Route>
         </Routes>
