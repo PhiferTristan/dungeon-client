@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteUserById, getUserById } from "../../managers/UserManager";
+import { deleteUserById, getUserByCurrentUserId } from "../../managers/UserManager";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUserStatus } from "../../managers/UserStatusManager";
@@ -13,7 +13,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
 
   useEffect(() => {
     if (currentUserId) {
-      getUserById(token, currentUserId).then((userObj) => {
+      getUserByCurrentUserId(token, currentUserId).then((userObj) => {
         setUser(userObj);
       });
     }
@@ -64,7 +64,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
           </button>
         </div>
 
-        <h2 className="text-4xl text-center">My Profile</h2>
+        <h2 className="text-4xl text-white text-center mb-4">My Profile</h2>
         <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">

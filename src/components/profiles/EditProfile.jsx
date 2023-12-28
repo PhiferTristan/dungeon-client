@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserById, updateUserProfile } from "../../managers/UserManager";
+import { getUserByCurrentUserId, updateUserProfile } from "../../managers/UserManager";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -18,7 +18,7 @@ export const EditProfile = ({ token, currentUserId }) => {
 
   useEffect(() => {
     if (currentUserId) {
-      getUserById(token, currentUserId).then((userObj) => {
+      getUserByCurrentUserId(token, currentUserId).then((userObj) => {
         setUser(userObj);
         // Initial form data of the user's current info
         setEditFormData({
