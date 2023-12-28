@@ -65,7 +65,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="profile"
+              to="profiles/mine"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Profile
@@ -125,7 +125,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="profile"
+              to="profiles/mine"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Profile
@@ -200,7 +200,7 @@ export const NavBar = ({
                     Characters
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="profile">
+                <Link spy="true" smooth="true" to="profiles/mine">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Profile
                   </li>
@@ -246,7 +246,7 @@ export const NavBar = ({
                     My Characters
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="profile">
+                <Link spy="true" smooth="true" to="profiles/mine">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Profile
                   </li>
