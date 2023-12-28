@@ -73,10 +73,7 @@ export const CharacterDetails = ({ token }) => {
           </button>
         </div>
         <div>
-          <button
-            onClick={handleDelete}
-            // className="bg-red-500 hover:bg-red-700 text-white py-2 px-2 rounded ml-2 focus:outline-none focus:shadow-outline flex items-center"
-          >
+          <button onClick={handleDelete} className="">
             <div className="flex items-center">
               <HiTrash className="h-7 w-7 mr-1" />
             </div>
@@ -135,58 +132,23 @@ export const CharacterDetails = ({ token }) => {
           <span>Proficiency Bonus</span>
         </div>
         <div className="saving-throws-container">
-  {character.character_saving_throws?.map((savingThrow, index) => {
-    // Find the corresponding ability score for this saving throw
-    const correspondingAbility = character.character_abilities.find(
-      (ability) => ability.ability_label === savingThrow.saving_throw_label
-    );
-
-    // Use the corresponding ability score in the calculation
-    const abilityScore = correspondingAbility
-      ? correspondingAbility.score_value
-      : 10; // Use 10 as a default if not found
-
-    return (
-      <div key={index} className="saving-throw flex items-center">
-        <span
-          className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
-            savingThrow.proficient ? 'bg-green-500' : 'bg-gray-300'
-          }`}
-        ></span>
-        <span className="saving-throw-modifier">
-          +
-          {calculateSavingThrowModifier(
-            abilityScore,
-            character.level,
-            savingThrow.proficient
-          )}
-        </span>
-        <span className="saving-throw-label">
-          {savingThrow.saving_throw_label}
-        </span>
-      </div>
-    );
-  })}
-</div>;
-        ;
-        {/* <div className="saving-throws-container">
           {character.character_saving_throws?.map((savingThrow, index) => {
-            // Find the corresponding ability score for this saving throw
             const correspondingAbility = character.character_abilities.find(
               (ability) =>
                 ability.ability_label === savingThrow.saving_throw_label
             );
 
-            // Use the corresponding ability score in the calculation
             const abilityScore = correspondingAbility
               ? correspondingAbility.score_value
-              : 10; // Use 10 as a default if not found
+              : 0;
 
             return (
-              <div key={index}>
-                <span className="saving-throw-proficient">
-                  {savingThrow.proficient}
-                </span>
+              <div key={index} className="saving-throw flex items-center">
+                <span
+                  className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
+                    savingThrow.proficient ? "bg-green-500" : "bg-gray-300"
+                  }`}
+                ></span>
                 <span className="saving-throw-modifier">
                   +
                   {calculateSavingThrowModifier(
@@ -201,18 +163,8 @@ export const CharacterDetails = ({ token }) => {
               </div>
             );
           })}
-        </div> */}
+        </div>
       </div>
     </>
   );
 };
-
-/* <div className="saving-throws-container">
-    {character.character_saving_throws?.map((savingThrow, index) => (
-        <div key={index}>
-            <span className="saving-throw-proficient">{savingThrow.proficient}</span>
-            <span className="saving-throw-modifier">+{calculateSavingThrowModifier(character.character_abilities.score_value, character.level, savingThrow.proficient)}</span>
-            <span className="saving-throw-label">{savingThrow.saving_throw_label}</span>
-        </div>
-    ))}
-</div> */
