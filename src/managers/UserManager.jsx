@@ -26,3 +26,12 @@ export const updateUserProfile = (token, currentUserId, updatedUserData) => {
     body: JSON.stringify(updatedUserData)
   })
 }
+
+export const deleteUserById = (token, currentUserId) => {
+  return fetch(`http://localhost:8000/users/${currentUserId}/delete`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${token}`,
+    }
+  })
+}

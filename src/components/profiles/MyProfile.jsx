@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { getUserById } from "../../managers/UserManager";
+import { deleteUserById, getUserById } from "../../managers/UserManager";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { updateUserStatus } from "../../managers/UserStatusManager";
 
 export const MyProfile = ({ token, currentUserId, currentUserType }) => {
   const [user, setUser] = useState([]);
+
+  const navigate = useNavigate();
 
   console.log(currentUserId);
 
@@ -23,27 +25,45 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
       setUser((prevUser) => ({ ...prevUser, lfp_status: !user.lfp_status })); // Update local state
     } else {
       updateUserStatus(token, currentUserId, !user.lfg_status);
-      setUser((prevUser) => ({ ...prevUser, lfg_status: !user.lfg_status }))
+      setUser((prevUser) => ({ ...prevUser, lfg_status: !user.lfg_status }));
+    }
+  };
+
+  const handleDeleteButtonClick = async () => {
+    try {
+      await deleteUserById(token, currentUserId);
+      localStorage.clear();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error deleting user", error);
     }
   };
 
   MyProfile.propTypes = {
     token: PropTypes.string,
     currentUserId: PropTypes.string,
-    currentUserType: PropTypes.string
+    currentUserType: PropTypes.string,
   };
 
   return (
     <>
       <div>
-      <div className="flex justify-end p-4">
+        <div className="flex justify-end p-4">
           <Link
             to="/profiles/edit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Edit Account
           </Link>
+
+          <button
+            onClick={handleDeleteButtonClick}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2 focus:outline-none focus:shadow-outline"
+          >
+            Delete Account
+          </button>
         </div>
+
         <h2 className="text-4xl text-center">My Profile</h2>
         <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
@@ -116,7 +136,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
 };
 
 // {
-  /* {user.user_type === "DM" ? (
+/* {user.user_type === "DM" ? (
   <button
     onClick={handleStatusButtonClick}
     className={`${

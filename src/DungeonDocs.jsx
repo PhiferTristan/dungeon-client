@@ -5,7 +5,7 @@ import { NavBar } from "./components/nav/NavBar";
 export const DungeonDocs = () => {
   const [token, setTokenState] = useState(localStorage.getItem("auth_token"));
   const staff = JSON.parse(localStorage.getItem("staff")); // should be a boolean value
-  const currentUserId = JSON.parse(localStorage.getItem("id"));
+  const currentUserId = localStorage.getItem("id");
   const currentUserType = localStorage.getItem("userType");
 
   const setToken = (newToken) => {
