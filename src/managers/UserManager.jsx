@@ -15,3 +15,14 @@ export const getUserById = (token, currentUserId) => {
     },
   }).then((res) => res.json());
 };
+
+export const updateUserProfile = (token, currentUserId, updatedUserData) => {
+  return fetch(`http://localhost:8000/users/${currentUserId}/update`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(updatedUserData)
+  })
+}

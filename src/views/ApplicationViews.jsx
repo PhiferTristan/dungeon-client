@@ -4,7 +4,8 @@ import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
 import { Homepage } from "../components/homepage/Homepage";
 import PropTypes from "prop-types";
-import { MyProfile } from "../components/profile/MyProfile";
+import { MyProfile } from "../components/profiles/MyProfile";
+import { EditProfile } from "../components/profiles/EditProfile";
 
 export const ApplicationViews = ({
   token,
@@ -47,7 +48,8 @@ export const ApplicationViews = ({
               }
             />
             <Route path="profiles">
-              <Route path="mine" element={<MyProfile token={token} currentUserId={currentUserId} currentUserType={currentUserType}/>} />
+              <Route path="mine" element={<MyProfile token={token} currentUserId={currentUserId} currentUserType={currentUserType} />} />
+              <Route path="edit" element={<EditProfile token={token} currentUserId={currentUserId} />} />
             </Route>
           </Route>
         </Routes>

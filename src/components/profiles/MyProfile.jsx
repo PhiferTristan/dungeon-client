@@ -36,6 +36,14 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
   return (
     <>
       <div>
+      <div className="flex justify-end p-4">
+          <Link
+            to="/profiles/edit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Edit Account
+          </Link>
+        </div>
         <h2 className="text-4xl text-center">My Profile</h2>
         <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
@@ -107,7 +115,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
   );
 };
 
-{
+// {
   /* {user.user_type === "DM" ? (
   <button
     onClick={handleStatusButtonClick}
@@ -133,4 +141,4 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
     {user.player_user.lfg_status ? "Disable LFG" : "Enable LFG"}
   </button>
 )} */
-}
+// }
