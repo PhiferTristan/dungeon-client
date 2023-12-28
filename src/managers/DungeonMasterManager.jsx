@@ -1,5 +1,5 @@
-export const getAllPlayers = (token) => {
-    return fetch(`http://localhost:8000/players`, {
+export const getAllDungeonMasters = (token) => {
+    return fetch(`http://localhost:8000/dungeon_masters`, {
         headers: {
             Authorization: `Token ${token}`,
             "Content-Type": "application/json",
@@ -7,8 +7,8 @@ export const getAllPlayers = (token) => {
     }).then((res) => res.json())
 }
 
-export const getPlayerByPlayerId = (token, playerId) => {
-    return fetch(`http://localhost:8000/players/${playerId}`, {
+export const getDungeonMasterById = (token, dungeonMasterId) => {
+    return fetch(`http://localhost:8000/dungeon_masters/${dungeonMasterId}`, {
         headers: {
             Authorization: `Token ${token}`,
             "Content-Type": "application/json"
