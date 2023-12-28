@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { MyProfile } from "../components/profiles/MyProfile";
 import { EditProfile } from "../components/profiles/EditProfile";
 import { PlayersList } from "../components/players/PlayersList";
+import { Profile } from "../components/profiles/Profile";
 
 export const ApplicationViews = ({
   token,
@@ -50,13 +51,30 @@ export const ApplicationViews = ({
             />
 
             <Route path="profiles">
-              <Route path="mine" element={<MyProfile token={token} currentUserId={currentUserId} currentUserType={currentUserType} />} />
-              <Route path="edit" element={<EditProfile token={token} currentUserId={currentUserId} />} />
+              <Route
+                path="mine"
+                element={
+                  <MyProfile
+                    token={token}
+                    currentUserId={currentUserId}
+                    currentUserType={currentUserType}
+                  />
+                }
+              />
+              <Route
+                path="edit"
+                element={
+                  <EditProfile token={token} currentUserId={currentUserId} />
+                }
+              />
+              <Route
+                path="details/:userId"
+                element={<Profile token={token} />}
+              />
             </Route>
 
             <Route path="players">
-              <Route path="all"
-              element={<PlayersList token={token} />} />
+              <Route path="all" element={<PlayersList token={token} />} />
             </Route>
           </Route>
         </Routes>

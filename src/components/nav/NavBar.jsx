@@ -41,7 +41,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="parties"
+              to="parties/all"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Parties
@@ -49,7 +49,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="myparties"
+              to="parties/mine"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               My Parties
@@ -57,7 +57,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="characters"
+              to="characters/all"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Characters
@@ -85,7 +85,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="dungeonmasters"
+              to="dungeonmasters/all"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Dungeon Masters
@@ -93,7 +93,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="parties"
+              to="parties/all"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Parties
@@ -101,7 +101,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="myparties"
+              to="parties/mine"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               My Parties
@@ -109,7 +109,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="characters"
+              to="characters/all"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               Characters
@@ -117,7 +117,7 @@ export const NavBar = ({
             <Link
               spy="true"
               smooth="true"
-              to="mycharacters"
+              to="characters/mine"
               className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
             >
               My Characters
@@ -180,22 +180,22 @@ export const NavBar = ({
           <>
             <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-slate-900 transition">
               <ul className="text-center text-xl p-20">
-                <Link spy="true" smooth="true" to="players">
+                <Link spy="true" smooth="true" to="players/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Players
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="parties">
+                <Link spy="true" smooth="true" to="parties/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Parties
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="myparties">
+                <Link spy="true" smooth="true" to="parties/mine">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     My Parties
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="characters">
+                <Link spy="true" smooth="true" to="characters/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Characters
                   </li>
@@ -221,27 +221,27 @@ export const NavBar = ({
           <>
             <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-slate-900 transition">
               <ul className="text-center text-xl p-20">
-                <Link spy="true" smooth="true" to="dungeonmasters">
+                <Link spy="true" smooth="true" to="dungeonmasters/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Dungeon Masters
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="parties">
+                <Link spy="true" smooth="true" to="parties/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Parties
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="myparties">
+                <Link spy="true" smooth="true" to="parties/mine">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     My Parties
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="characters">
+                <Link spy="true" smooth="true" to="characters/all">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     Characters
                   </li>
                 </Link>
-                <Link spy="true" smooth="true" to="mycharacters">
+                <Link spy="true" smooth="true" to="characters/mine">
                   <li className="my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded">
                     My Characters
                   </li>
