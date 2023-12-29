@@ -58,6 +58,41 @@ export const editParty = (party, partyId, token) => {
   });
 };
 
+export const createParty = async (party, token) => {
+  try {
+    const response = await fetch('http://localhost:8000/parties', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+      body: JSON.stringify(party),
+    });
+
+    if (!response.ok) {
+      // Handle non-OK responses here
+      throw new Error('Failed to create party');
+    }
+
+    const partyObj = await response.json();
+    return partyObj;
+  } catch (error) {
+    console.error('Error creating party:', error);
+    throw error;
+  }
+};
+
+// export const createParty = async (party, token) => {
+//   return fetch(`http://localhost:8000/parties`, {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Token ${token}`,
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(party),
+//   }).then((res) => res.json());
+// };
+
 export const removeCharacterFromParty = async (token, partyId, characterId) => {
   try {
     const response = await fetch(

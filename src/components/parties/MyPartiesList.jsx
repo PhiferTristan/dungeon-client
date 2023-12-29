@@ -59,6 +59,18 @@ export const MyPartiesList = ({ token }) => {
     <>
       <div>
         <h1 className="text-3xl text-white text-center mb-4">My Parties</h1>
+
+        {/* Conditionally render "Create Party" button for Dungeon Master users */}
+        {userType === "DM" && (
+          <div className="mb-4 text-center">
+            <Link to="/parties/create">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Create Party
+              </button>
+            </Link>
+          </div>
+        )}
+
         <ul className="w-full">
           {allParties.map((party) => (
             <li key={party.id} className="mb-4 p-4 bg-white shadow-md flex">

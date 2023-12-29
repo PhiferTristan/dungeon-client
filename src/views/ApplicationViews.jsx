@@ -16,6 +16,7 @@ import { PartiesList } from "../components/parties/PartiesList";
 import { MyPartiesList } from "../components/parties/MyPartiesList";
 import { PartyDetails } from "../components/parties/PartyDetails";
 import { UpdateParty } from "../components/parties/UpdateParty";
+import { PartyForm } from "../components/parties/PartyForm";
 
 export const ApplicationViews = ({
   token,
@@ -100,6 +101,7 @@ export const ApplicationViews = ({
                 <Route path="mine" element={<MyPartiesList token={token} />} />
                 <Route path="details/:partyId" element={<PartyDetails token={token} />} />
                 <Route path="edit/:partyId" element={<UpdateParty token={token} />} />
+                <Route path="create" element={<PartyForm token={token} />} />
             </Route>
           </Route>
         </Routes>
