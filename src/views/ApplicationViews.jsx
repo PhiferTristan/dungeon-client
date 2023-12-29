@@ -12,6 +12,7 @@ import { CharactersList } from "../components/characters/CharactersList";
 import { CharacterDetails } from "../components/characters/CharacterDetails";
 import { DungeonMastersList } from "../components/dungeonmasters/DungeonMastersList";
 import { MyCharactersList } from "../components/characters/MyCharactersList";
+import { PartiesList } from "../components/parties/PartiesList";
 
 export const ApplicationViews = ({
   token,
@@ -89,6 +90,10 @@ export const ApplicationViews = ({
               <Route path="all" element={<CharactersList token={token} />} />
               <Route path="details/:characterId" element={<CharacterDetails token={token} />} />
               <Route path="mine" element={<MyCharactersList token={token} />} />
+            </Route>
+
+            <Route path="parties">
+                <Route path="all" element={<PartiesList token={token} />} />
             </Route>
           </Route>
         </Routes>
