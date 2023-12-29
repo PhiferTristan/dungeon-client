@@ -44,6 +44,16 @@ export const Register = ({ setToken }) => {
           localStorage.setItem("staff", res.staff);
           localStorage.setItem("userType", res.user_type);
           localStorage.setItem("id", res.id);
+
+          // Check and set playerId if user's user_type is "Player"
+          if (res.user_type === "Player" && "player_user" in res) {
+            localStorage.setItem("playerId", res.player_user.id);
+          }
+
+          // Check and set dungeonMasterId if user's user_type is "DM"
+          if (res.user_type === "DM" && "dungeon_master_user" in res) {
+            localStorage.setItem("dungeonMasterId", res.dungeon_master_user.id);
+          }
           setRegistrationSuccess(true);
         }
       });
@@ -65,7 +75,9 @@ export const Register = ({ setToken }) => {
   return (
     <section className="flex items-center justify-center min-h-screen">
       <form className="w-full max-w-md" onSubmit={handleRegister}>
-        <h1 className="text-3xl font-bold mb-4 text-center">Registration Form</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center">
+          Registration Form
+        </h1>
         <p className="text-lg mb-4 text-center">Create an account</p>
 
         <div className="mb-4">
