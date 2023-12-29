@@ -5,18 +5,12 @@ import { getAllParties } from "../../managers/PartyManager";
 
 export const PartiesList = ({ token }) => {
   const [allParties, setAllParties] = useState([]);
-  //   const navigate = useNavigate();
-
-  console.log(localStorage);
-  console.log(token);
 
   useEffect(() => {
     getAllParties(token).then((partiesArray) => {
       setAllParties(partiesArray);
     });
   }, [token]);
-
-  console.log(allParties);
 
   PartiesList.propTypes = {
     token: PropTypes.string,

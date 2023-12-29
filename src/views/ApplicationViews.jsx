@@ -13,6 +13,9 @@ import { CharacterDetails } from "../components/characters/CharacterDetails";
 import { DungeonMastersList } from "../components/dungeonmasters/DungeonMastersList";
 import { MyCharactersList } from "../components/characters/MyCharactersList";
 import { PartiesList } from "../components/parties/PartiesList";
+import { MyPartiesList } from "../components/parties/MyPartiesList";
+import { PartyDetails } from "../components/parties/PartyDetails";
+import { UpdateParty } from "../components/parties/UpdateParty";
 
 export const ApplicationViews = ({
   token,
@@ -94,6 +97,9 @@ export const ApplicationViews = ({
 
             <Route path="parties">
                 <Route path="all" element={<PartiesList token={token} />} />
+                <Route path="mine" element={<MyPartiesList token={token} />} />
+                <Route path="details/:partyId" element={<PartyDetails token={token} />} />
+                <Route path="edit/:partyId" element={<UpdateParty token={token} />} />
             </Route>
           </Route>
         </Routes>
