@@ -6,6 +6,7 @@ import {
   deletePartyById,
   getAllPartiesByDungeonMasterId,
   getAllPartiesByPlayerId,
+  leaveParty,
 } from "../../managers/PartyManager";
 
 export const MyPartiesList = ({ token }) => {
@@ -42,11 +43,53 @@ export const MyPartiesList = ({ token }) => {
 
     if (isConfirmed) {
       try {
-        await deletePartyById(token, partyId).then(() => {
-          // getAllPartiesByDungeonMasterId(token, dungeonMasterId);
-        });
+        await deletePartyById(token, partyId).then(() => {});
       } catch (error) {
         console.error("Error deleting party", error);
+      }
+    }
+  };
+
+  const handleLeaveButtonClick = async (token, partyId) => {
+    console.log("Leave button clicked");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to leave this party?"
+    );
+
+    if (isConfirmed) {
+      try {
+        // Find the party based on the partyId
+        const partyToUpdate = allParties.find((p) => p.id === partyId);
+
+        if (partyToUpdate) {
+          console.log("Party characters:", partyToUpdate.characters);
+          console.log("Player ID:", playerId);
+
+          // Check if the characters array is not empty
+          if (partyToUpdate.characters && partyToUpdate.characters.length > 0) {
+            // Find the character ID for the current player in the party
+            const character = partyToUpdate.characters.find(
+              (c) => c.player_user && c.player_user.id === Number(playerId)
+            );
+
+            if (character) {
+              const characterId = character.id;
+
+              console.log("Character:", character);
+              console.log("Character ID:", characterId);
+
+              await leaveParty(token, partyId, characterId).then(() => {});
+            } else {
+              console.error("Character not found for the player");
+            }
+          } else {
+            console.error("Characters array is empty");
+          }
+        } else {
+          console.error("Party is undefined");
+        }
+      } catch (error) {
+        console.error("Error leaving party", error);
       }
     }
   };
@@ -116,6 +159,27 @@ export const MyPartiesList = ({ token }) => {
                   {party.lfp_status ? "Active" : "Not Active"}
                 </h3>
               </div>
+
+              {/* Conditionally render "Leave Party" button for Player users */}
+              {userType === "Player" && (
+                <div className="flex-1 border items-center justify-center">
+                  <button
+                    className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer"
+                    onClick={() => {
+                      console.log("Party", party);
+                      handleLeaveButtonClick(
+                        token,
+                        party.id,
+                        party.characters.find(
+                          (c) => c.player_user?.id === playerId
+                        )?.id
+                      );
+                    }}
+                  >
+                    Leave Party
+                  </button>
+                </div>
+              )}
 
               {/* Conditionally render delete button for DM */}
               {userType === "DM" && (
