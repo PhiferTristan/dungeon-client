@@ -24,6 +24,7 @@ export const PlayerPartiesList = ({ token }) => {
           {playerId}
           {"'"}s Parties
         </h1>
+        {/* Parties List */}
         <ul className="w-full">
           {parties.map((party) => (
             <li key={party.id} className="mb-4 p-4 bg-white shadow-md flex">
@@ -33,7 +34,7 @@ export const PlayerPartiesList = ({ token }) => {
                   <h3 className="text-center">{party.name}</h3>
                 </Link>
               </div>
-
+              {/* Dungeon Master */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Dungeon Master:</h2>
                 <Link to={`/profiles/details/${party.dungeon_master.user.id}`}>
@@ -42,7 +43,7 @@ export const PlayerPartiesList = ({ token }) => {
                   </h3>
                 </Link>
               </div>
-
+              {/* Player Name List */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Players:</h2>
                 <h3 className="text-center">
@@ -57,12 +58,12 @@ export const PlayerPartiesList = ({ token }) => {
                   ))}
                 </h3>
               </div>
-
+              {/* # of Characters */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Number of Characters:</h2>
                 <h3 className="text-center">{party.characters.length}</h3>
               </div>
-
+              {/* LFP Status */}
               <div className="flex-1 border">
                 <h2 className="text-center">Looking for Player Status:</h2>
                 <h3 className="text-center">
