@@ -62,10 +62,8 @@ export const UpdateParty = ({ token }) => {
         })
       );
 
-      // Clear the charactersToRemove list
       setCharactersToRemove([]);
 
-      // Continue with the save changes logic
       const party = {
         name: currentParty.name,
         description: currentParty.description,
@@ -87,7 +85,6 @@ export const UpdateParty = ({ token }) => {
     <>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-white">Edit Party</h1>
-
         {/* Party Update Form */}
         <form onSubmit={handleSave} className="bg-gray-200 p-4 mb-4 rounded-md">
           {/* Editable Party Name */}
@@ -112,27 +109,27 @@ export const UpdateParty = ({ token }) => {
               </div>
             </fieldset>
           </div>
-
-          {/* Characters Box */}
+          {/* Characters List */}
           <div className="bg-white p-4 mb-4 rounded-md">
             <h2 className="text-2xl text-center mb-2">Characters</h2>
             <ul className="w-full">
               {currentParty.characters?.map((character) => (
                 <li
                   key={character.id}
-                  //   className="mb-4 p-4 bg-white shadow-md flex"
                   className={`mb-4 p-4 bg-white shadow-md flex ${
                     charactersToRemove.includes(character.id)
                       ? "bg-red-400"
                       : ""
                   }`}
                 >
+                  {/* Character Player Username */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Player Username:</h2>
                     <h3 className="font text-center">
                       {character.player_user.user.username}
                     </h3>
                   </div>
+                  {/* Character Name */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Character Name:</h2>
                     <Link to={`/characters/details/${character.id}`}>
@@ -141,6 +138,7 @@ export const UpdateParty = ({ token }) => {
                       </h3>
                     </Link>
                   </div>
+                  {/* Remove Player Button */}
                   <div className="flex-1 border">
                     <h2 className="text-center">Remove Player:</h2>
                     <button
@@ -157,7 +155,6 @@ export const UpdateParty = ({ token }) => {
               ))}
             </ul>
           </div>
-
           {/* Editable Bio */}
           <div className="mb-2">
             <fieldset>
@@ -178,7 +175,6 @@ export const UpdateParty = ({ token }) => {
               </div>
             </fieldset>
           </div>
-
           {/* Submit Button */}
           <button
             type="submit"

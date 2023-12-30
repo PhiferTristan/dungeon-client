@@ -140,21 +140,3 @@ export const PartyForm = ({ token }) => {
     </>
   );
 };
-
-{
-  /* Checkbox for lfp_status
-<div className="mb-2">
-  <fieldset>
-    <label className="block text-sm font-medium text-gray-600">
-      Looking for Players:
-      <input
-        type="checkbox"
-        name="lfp_status"
-        checked={newParty.lfp_status}
-        onChange={changePartyState}
-        className="ml-2"
-      />
-    </label>
-  </fieldset>
-</div> */
-}

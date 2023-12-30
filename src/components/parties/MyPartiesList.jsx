@@ -113,19 +113,19 @@ export const MyPartiesList = ({ token }) => {
             </Link>
           </div>
         )}
-
+        {/* Parties List */}
         <ul className="w-full">
           {allParties.map((party) => (
             <li key={party.id} className="mb-4 p-4 bg-white shadow-md flex">
-              
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Party Name:</h2>
-                <Link to={`/parties/details/${party.id}`}
-                className="">
-                  <h3 className="text-center hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer">{party.name}</h3>
+                <Link to={`/parties/details/${party.id}`} className="">
+                  <h3 className="text-center hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer">
+                    {party.name}
+                  </h3>
                 </Link>
               </div>
-
+              {/* Dungeon Master */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Dungeon Master:</h2>
                 <Link to={`/profiles/details/${party.dungeon_master?.user.id}`}>
@@ -134,12 +134,15 @@ export const MyPartiesList = ({ token }) => {
                   </h3>
                 </Link>
               </div>
-
+              {/* Player Names List */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Players:</h2>
                 <h3 className="text-center">
                   {party.characters?.map((character) => (
-                    <li className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer" key={character.id}>
+                    <li
+                      className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer"
+                      key={character.id}
+                    >
                       <Link
                         to={`/profiles/details/${character.player_user.user.id}`}
                       >
@@ -149,19 +152,18 @@ export const MyPartiesList = ({ token }) => {
                   ))}
                 </h3>
               </div>
-
+              {/* # of Characters */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Number of Characters:</h2>
                 <h3 className="text-center">{party.characters?.length}</h3>
               </div>
-
+              {/* LFP Status */}
               <div className="flex-1 border">
                 <h2 className="text-center">Looking for Player Status:</h2>
                 <h3 className="text-center">
                   {party.lfp_status ? "Active" : "Not Active"}
                 </h3>
               </div>
-
               {/* Conditionally render "Leave Party" button for Player users */}
               {userType === "Player" && (
                 <div className="flex-1 pr-4 border">
@@ -182,8 +184,7 @@ export const MyPartiesList = ({ token }) => {
                   </button>
                 </div>
               )}
-
-              {/* Conditionally render delete button for DM */}
+              {/* Conditionally render delete and edit buttons for DM */}
               {userType === "DM" && (
                 <div className="flex-1 border items-center justify-center">
                   <button
