@@ -75,3 +75,14 @@ export const editCharacter = (character, characterId, token) => {
     throw error;
   });
 };
+
+export const createCharacter = (token, characterObj) => {
+  return fetch(`http://localhost:8000/characters`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(characterObj),
+  }).then((res) => res.json());
+}
