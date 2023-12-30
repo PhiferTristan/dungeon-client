@@ -40,6 +40,15 @@ export const MyCharactersList = ({ token }) => {
     <>
       <div>
         <h1 className="text-3xl text-white text-center mb-4">My Characters</h1>
+        {/* Create Character Button */}
+        <div className="text-center mb-4">
+          <button
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            onClick={() => navigate("/characters/create")}
+          >
+            Create Character
+          </button>
+        </div>
         <ul className="w-full">
           {allCharacters.map((character) => (
             <li key={character.id} className="mb-4 p-4 bg-white shadow-md flex">

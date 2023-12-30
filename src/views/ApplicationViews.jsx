@@ -21,6 +21,7 @@ import { UpdateCharacter } from "../components/characters/UpdateCharacter";
 import { PlayerPartiesList } from "../components/parties/PlayerPartiesList";
 import { DMPartiesList } from "../components/parties/DungeonMasterPartiesList";
 import { PlayerCharactersList } from "../components/characters/PlayerCharacterList";
+import { CharacterForm } from "../components/characters/CharacterForm";
 
 export const ApplicationViews = ({
   token,
@@ -100,6 +101,7 @@ export const ApplicationViews = ({
               <Route path="mine" element={<MyCharactersList token={token} />} />
               <Route path="edit/:characterId" element={<UpdateCharacter token={token} />} />
               <Route path="players_characters/:playerId" element={<PlayerCharactersList token={token} />} />
+              <Route path="create" element={<CharacterForm token={token} />} />
             </Route>
 
             <Route path="parties">

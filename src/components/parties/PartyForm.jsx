@@ -49,7 +49,7 @@ export const PartyForm = ({ token }) => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-white">Create Party Form</h1>
 
-        {/* Party Update Form */}
+        {/* Party Create Form */}
         <form onSubmit={handleSave} className="bg-gray-200 p-4 mb-4 rounded-md">
           {/* Editable Party Name */}
           <div className="mb-2">
