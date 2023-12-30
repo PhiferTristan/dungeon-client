@@ -30,7 +30,7 @@ export const PartyDetails = ({ token }) => {
             <p className="text-sm text-gray-600">
               Players: {party.characters?.length || 0}
             </p>
-            
+
             {/* Created On */}
             <p className="text-sm text-gray-600">
               Created On: {party.created_on}
@@ -40,32 +40,32 @@ export const PartyDetails = ({ token }) => {
           {/* Party Name */}
           <h1 className="text-3xl text-center mb-2">{party.name}</h1>
 
-          {/* Dungeon Master Box */}
+          {/* Dungeon Master */}
           <div className="bg-white p-4 rounded-md">
             <Link to={`/profiles/details/${party.dungeon_master?.user.id}`}>
-            <h2 className="text-2xl text-center mb-2">
-              DM: {party.dungeon_master?.user.username}
-            </h2>
+              <h2 className="text-2xl text-center mb-2">
+                DM: {party.dungeon_master?.user.username}
+              </h2>
             </Link>
           </div>
-
           {/* Characters Box */}
           <div className="bg-white p-4 mb-4 rounded-md">
             <h2 className="text-2xl text-center mb-2">Characters</h2>
-
+            {/* List of Characters */}
             <ul className="w-full">
               {party.characters?.map((character) => (
                 <li
                   key={character.id}
                   className="mb-4 p-4 bg-white shadow-md flex"
                 >
+                  {/* Player Username */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Player Username:</h2>
                     <h3 className="font text-center">
                       {character.player_user.user.username}
                     </h3>
                   </div>
-
+                  {/* Character Name */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Character Name:</h2>
                     <Link to={`/characters/details/${character.id}`}>
@@ -74,22 +74,22 @@ export const PartyDetails = ({ token }) => {
                       </h3>
                     </Link>
                   </div>
-
+                  {/* Character Class */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Class or Classes:</h2>
                     <h3 className="text-center">placeholder</h3>
                   </div>
-
+                  {/* Character Race */}
                   <div className="flex-1 border">
                     <h2 className="text-center">Race:</h2>
                     <h3 className="text-center">{character.race}</h3>
                   </div>
-
+                  {/* Character Level */}
                   <div className="flex-1 border">
                     <h2 className="text-center">Level:</h2>
                     <h3 className="text-center">{character.level}</h3>
                   </div>
-
+                  {/* Character Health Points */}
                   <div className="flex-1 border">
                     <h2 className="text-center">HP:</h2>
                     <h3 className="text-center">placeholder</h3>
@@ -99,8 +99,7 @@ export const PartyDetails = ({ token }) => {
             </ul>
           </div>
         </div>
-
-        {/* Bio Box */}
+        {/* Party Bio */}
         <div className="bg-gray-200 p-4 rounded-md">
           <h2 className="text-2xl mb-2">Party Bio</h2>
           <p>{party.description}</p>

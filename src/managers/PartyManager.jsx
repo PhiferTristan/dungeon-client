@@ -38,6 +38,30 @@ export const getAllPartiesByDungeonMasterId = (token, dungeonMasterId) => {
   ).then((res) => res.json());
 };
 
+export const getPlayersPartiesById = (token, playerId) => {
+  return fetch(
+    `http://localhost:8000/parties/player/${playerId}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => res.json());
+}
+
+export const getDMsPartiesById = (token, dungeonMasterId) => {
+  return fetch(
+    `http://localhost:8000/parties/dungeon_master/${dungeonMasterId}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => res.json());
+}
+
 export const deletePartyById = (token, partyId) => {
   return fetch(`http://localhost:8000/parties/${partyId}`, {
     method: "DELETE",

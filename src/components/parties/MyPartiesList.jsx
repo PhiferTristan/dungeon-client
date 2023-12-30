@@ -117,17 +117,19 @@ export const MyPartiesList = ({ token }) => {
         <ul className="w-full">
           {allParties.map((party) => (
             <li key={party.id} className="mb-4 p-4 bg-white shadow-md flex">
+              
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Party Name:</h2>
-                <Link to={`/parties/details/${party.id}`}>
-                  <h3 className="text-center">{party.name}</h3>
+                <Link to={`/parties/details/${party.id}`}
+                className="">
+                  <h3 className="text-center hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer">{party.name}</h3>
                 </Link>
               </div>
 
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Dungeon Master:</h2>
                 <Link to={`/profiles/details/${party.dungeon_master?.user.id}`}>
-                  <h3 className="text-center">
+                  <h3 className="text-center hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer">
                     {party.dungeon_master?.user.username}
                   </h3>
                 </Link>
@@ -137,7 +139,7 @@ export const MyPartiesList = ({ token }) => {
                 <h2 className="text-center">Players:</h2>
                 <h3 className="text-center">
                   {party.characters?.map((character) => (
-                    <li className="" key={character.id}>
+                    <li className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer" key={character.id}>
                       <Link
                         to={`/profiles/details/${character.player_user.user.id}`}
                       >
@@ -162,11 +164,11 @@ export const MyPartiesList = ({ token }) => {
 
               {/* Conditionally render "Leave Party" button for Player users */}
               {userType === "Player" && (
-                <div className="flex-1 border items-center justify-center">
+                <div className="flex-1 pr-4 border">
+                  <h2 className="text-center">Leave Party</h2>
                   <button
                     className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer"
                     onClick={() => {
-                      console.log("Party", party);
                       handleLeaveButtonClick(
                         token,
                         party.id,
