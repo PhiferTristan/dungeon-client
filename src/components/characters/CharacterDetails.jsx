@@ -66,14 +66,14 @@ export const CharacterDetails = ({ token }) => {
         <h4 className="text-center">Character Sheet</h4># the top left of
         character sheet
         <div>
-          <button onClick={handleEditClick} className="">
+          <button onClick={() => handleEditClick(characterId)} className="">
             <div className="flex items-center">
               <HiCog className="h-7 w-7 mr-1" />
             </div>
           </button>
         </div>
         <div>
-          <button onClick={handleDelete} className="">
+          <button onClick={() => handleDelete(characterId)} className="">
             <div className="flex items-center">
               <HiTrash className="h-7 w-7 mr-1" />
             </div>
