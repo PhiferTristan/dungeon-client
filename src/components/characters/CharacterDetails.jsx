@@ -62,8 +62,8 @@ export const CharacterDetails = ({ token }) => {
 
   return (
     <>
-      <div className="character-container flex flex-col">
-        <h4 className="text-center">Character Sheet</h4># the top left of
+      <div className="character-container flex flex-col items-center justify-center">
+        <h4 className="text-center text-4xl text-white">Character Sheet</h4># the top left of
         character sheet
         <div>
           <button onClick={() => handleEditClick(characterId)} className="">
@@ -85,7 +85,7 @@ export const CharacterDetails = ({ token }) => {
         # the top middle to top right of the character sheet
         <div>
           <div>
-            <span>placeholder: class</span>
+            <span>{character.dnd_class_label}</span>
           </div>
 
           <div>
@@ -109,7 +109,7 @@ export const CharacterDetails = ({ token }) => {
           </div>
         </div>
         #the left side of the character sheet for Abilities
-        <div className="abilities-container flex flex-col gap-4">
+        <div className="abilities-container flex flex-row gap-4">
           {character.character_abilities?.map((ability, index) => (
             <div
               className="ability-cube flex flex-col items-center justify-center w-[125px] h-[150px] p-4 bg-slate-300 border border-black rounded-md"

@@ -39,8 +39,8 @@ export const CharactersList = ({ token }) => {
               </div>
 
               <div className="flex-1 pr-4 border">
-                <h2 className="text-center">Class or Classes:</h2>
-                <h3 className="text-center">placeholder</h3>
+                <h2 className="text-center">Class:</h2>
+                <h3 className="text-center">{character.dnd_class_label}</h3>
               </div>
 
               <div className="flex-1 border">

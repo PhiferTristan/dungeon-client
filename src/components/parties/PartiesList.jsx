@@ -51,7 +51,7 @@ export const PartiesList = ({ token }) => {
                   </h3>
                 </Link>
               </div>
-            {/* Player Names List */}
+              {/* Player Names List */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Players:</h2>
                 <h3 className="text-center">
@@ -66,12 +66,12 @@ export const PartiesList = ({ token }) => {
                   ))}
                 </h3>
               </div>
-                    {/* # of Characters */}
+              {/* # of Characters */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Number of Characters:</h2>
                 <h3 className="text-center">{party.characters.length}</h3>
               </div>
-                    {/* LFP Status */}
+              {/* LFP Status */}
               <div className="flex-1 border">
                 <h2 className="text-center">Looking for Player Status:</h2>
                 <h3 className="text-center">
