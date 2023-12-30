@@ -15,6 +15,18 @@ export const getAllCharacters = (token) => {
   }).then((res) => res.json());
 };
 
+export const getAllPlayersCharacterById = (token, playerId) => {
+  return fetch(
+    `http://localhost:8000/characters/player/${playerId}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => res.json());
+}
+
 export const getAllCharactersByPlayerId = (token, playerId) => {
   return fetch(`http://localhost:8000/characters/?player_id=${playerId}`, {
     headers: {
@@ -39,5 +51,27 @@ export const deleteCharacter = (token, characterId) => {
     headers: {
       Authorization: `Token ${token}`,
     },
+  });
+};
+
+export const editCharacter = (character, characterId, token) => {
+  const url = `your_api_url/characters/${characterId}`;
+  
+  return fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(character),
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Process the data as needed
+    return data;
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    throw error;
   });
 };

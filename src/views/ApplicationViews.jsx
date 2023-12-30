@@ -16,6 +16,11 @@ import { PartiesList } from "../components/parties/PartiesList";
 import { MyPartiesList } from "../components/parties/MyPartiesList";
 import { PartyDetails } from "../components/parties/PartyDetails";
 import { UpdateParty } from "../components/parties/UpdateParty";
+import { PartyForm } from "../components/parties/PartyForm";
+import { UpdateCharacter } from "../components/characters/UpdateCharacter";
+import { PlayerPartiesList } from "../components/parties/PlayerPartiesList";
+import { DMPartiesList } from "../components/parties/DungeonMasterPartiesList";
+import { PlayerCharactersList } from "../components/characters/PlayerCharacterList";
 
 export const ApplicationViews = ({
   token,
@@ -93,6 +98,8 @@ export const ApplicationViews = ({
               <Route path="all" element={<CharactersList token={token} />} />
               <Route path="details/:characterId" element={<CharacterDetails token={token} />} />
               <Route path="mine" element={<MyCharactersList token={token} />} />
+              <Route path="edit/:characterId" element={<UpdateCharacter token={token} />} />
+              <Route path="players_characters/:playerId" element={<PlayerCharactersList token={token} />} />
             </Route>
 
             <Route path="parties">
@@ -100,6 +107,9 @@ export const ApplicationViews = ({
                 <Route path="mine" element={<MyPartiesList token={token} />} />
                 <Route path="details/:partyId" element={<PartyDetails token={token} />} />
                 <Route path="edit/:partyId" element={<UpdateParty token={token} />} />
+                <Route path="create" element={<PartyForm token={token} />} />
+                <Route path="players_parties/:playerId" element={<PlayerPartiesList token={token} />} />
+                <Route path="dms_parties/:dungeonMasterId" element={<DMPartiesList token={token} />} />
             </Route>
           </Route>
         </Routes>
