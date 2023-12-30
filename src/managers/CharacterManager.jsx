@@ -15,6 +15,18 @@ export const getAllCharacters = (token) => {
   }).then((res) => res.json());
 };
 
+export const getAllPlayersCharacterById = (token, playerId) => {
+  return fetch(
+    `http://localhost:8000/characters/player/${playerId}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  ).then((res) => res.json());
+}
+
 export const getAllCharactersByPlayerId = (token, playerId) => {
   return fetch(`http://localhost:8000/characters/?player_id=${playerId}`, {
     headers: {

@@ -38,7 +38,7 @@ export const getAllPartiesByDungeonMasterId = (token, dungeonMasterId) => {
   ).then((res) => res.json());
 };
 
-export const getPlayersPartiesById = (token, playerId) => {
+export const getAllPlayersPartiesById = (token, playerId) => {
   return fetch(
     `http://localhost:8000/parties/player/${playerId}`,
     {
@@ -50,7 +50,7 @@ export const getPlayersPartiesById = (token, playerId) => {
   ).then((res) => res.json());
 }
 
-export const getDMsPartiesById = (token, dungeonMasterId) => {
+export const getAllDMsPartiesById = (token, dungeonMasterId) => {
   return fetch(
     `http://localhost:8000/parties/dungeon_master/${dungeonMasterId}`,
     {

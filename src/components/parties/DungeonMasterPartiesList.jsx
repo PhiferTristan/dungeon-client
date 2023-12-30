@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getDMsPartiesById } from "../../managers/PartyManager";
+import { getAllDMsPartiesById } from "../../managers/PartyManager";
 
 export const DMPartiesList = ({ token }) => {
   const [parties, setParties] = useState([]);
   const { dungeonMasterId } = useParams();
 
   useEffect(() => {
-    getDMsPartiesById(token, dungeonMasterId).then((partyArray) => {
+    getAllDMsPartiesById(token, dungeonMasterId).then((partyArray) => {
       setParties(partyArray);
     });
   }, [token, dungeonMasterId]);

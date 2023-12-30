@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getPlayersPartiesById } from "../../managers/PartyManager";
+import { getAllPlayersPartiesById } from "../../managers/PartyManager";
 
 export const PlayerPartiesList = ({ token }) => {
   const [parties, setParties] = useState([]);
   const { playerId } = useParams();
 
   useEffect(() => {
-    getPlayersPartiesById(token, playerId).then((partyArray) => {
+    getAllPlayersPartiesById(token, playerId).then((partyArray) => {
       setParties(partyArray);
     });
   }, [token, playerId]);
