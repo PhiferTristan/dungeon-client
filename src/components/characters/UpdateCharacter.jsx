@@ -59,7 +59,7 @@ export const UpdateCharacter = ({ token }) => {
   };
   return (
     <>
-      <div className="character-container flex flex-col">
+      <div className="character-container flex flex-col items-center justify-center">
         <section>
           <form className="" onSubmit={handleSave}>
             <h1 className="text-4xl text-white text-center">
@@ -67,7 +67,7 @@ export const UpdateCharacter = ({ token }) => {
             </h1>
             # the top left of character sheet
             {/* Character Name */}
-            <fieldset className="field">
+            <fieldset className="">
               <label className="label">Character Name: </label>
               <div className="control">
                 <input
@@ -84,7 +84,7 @@ export const UpdateCharacter = ({ token }) => {
             # the top middle to top right of the character sheet
             <div>
               <div>
-                <span>placeholder: class</span>
+                <span>{currentCharacter.dnd_class_label}</span>
               </div>
 
               <div>
@@ -108,7 +108,7 @@ export const UpdateCharacter = ({ token }) => {
               </div>
             </div>
             #the left side of the character sheet for Abilities
-            <div className="abilities-container flex flex-col gap-4">
+            <div className="abilities-container flex flex-row gap-4">
               {currentCharacter.character_abilities?.map((ability, index) => (
                 <div
                   className="ability-cube flex flex-col items-center justify-center w-[125px] h-[150px] p-4 bg-slate-300 border border-black rounded-md"
