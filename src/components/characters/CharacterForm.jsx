@@ -8,6 +8,9 @@ import { getAllBackgrounds } from "../../managers/BackgroundManager";
 import { getBondsByBackgroundId } from "../../managers/BondManager";
 import { getAllAbilities } from "../../managers/AbilityManager";
 import { getAllDnDClasses } from "../../managers/DnDClassManager";
+import { getFlawsByBackgroundId } from "../../managers/FlawManager";
+import { getIdealsByBackgroundId } from "../../managers/IdealManager";
+import { getPersonalityTraitsByBackgroundId } from "../../managers/PersonalityTraitManager";
 
 export const CharacterForm = ({ token }) => {
   const [newCharacter, setNewCharacter] = useState({});
@@ -17,6 +20,9 @@ export const CharacterForm = ({ token }) => {
   const [alignments, setAlignments] = useState([]);
   const [backgrounds, setBackgrounds] = useState([]);
   const [bonds, setBonds] = useState([]);
+  const [flaws, setFlaws] = useState([]);
+  const [ideals, setIdeals] = useState([]);
+  const [personalityTraits, setPersonalityTraits] = useState([]);
   const [selectedBackground, setSelectedBackground] = useState(0);
   const [abilities, setAbilities] = useState([]);
   const [abilityScores, setAbilityScores] = useState({});
@@ -52,6 +58,20 @@ export const CharacterForm = ({ token }) => {
         setBonds(bondsArray);
         console.log(bonds);
       });
+
+      getFlawsByBackgroundId(token, selectedBackground).then((flawsArray) => {
+        setFlaws(flawsArray);
+      });
+
+      getIdealsByBackgroundId(token, selectedBackground).then((idealsArray) => {
+        setIdeals(idealsArray);
+      });
+
+      getPersonalityTraitsByBackgroundId(token, selectedBackground).then(
+        (personalityTraitsArray) => {
+          setPersonalityTraits(personalityTraitsArray);
+        }
+      );
     }
   }, [token, selectedBackground]);
 
@@ -96,6 +116,9 @@ export const CharacterForm = ({ token }) => {
       character_appearance: newCharacter.character_appearance,
       notes: newCharacter.notes,
       bond_id: parseInt(newCharacter.bond_id),
+      flaw_id: parseInt(newCharacter.flaw_id),
+      ideal_id: parseInt(newCharacter.ideal_id),
+      personality_trait_id: parseInt(newCharacter.personality_trait_id),
       ability_scores: abilityScores,
     };
 
@@ -115,7 +138,6 @@ export const CharacterForm = ({ token }) => {
     <>
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-white">Create Character Form</h1>
-
         {/* Party Update Form */}
         <form onSubmit={handleSave} className="bg-gray-200 p-4 mb-4 rounded-md">
           {/* Input Character Name */}
@@ -169,7 +191,10 @@ export const CharacterForm = ({ token }) => {
               <p>Description: {selectedClass.description}</p>
               <p>Primary Ability: {selectedClass.primary_ability}</p>
               <p>Hit Die: {selectedClass.hit_die}</p>
-              <p>Saving Throw Proficiencies: {selectedClass.saving_throw_prof_1} and {selectedClass.saving_throw_prof_2}</p>
+              <p>
+                Saving Throw Proficiencies: {selectedClass.saving_throw_prof_1}{" "}
+                and {selectedClass.saving_throw_prof_2}
+              </p>
             </div>
           )}
           {/* Input Character Level */}
@@ -336,7 +361,91 @@ export const CharacterForm = ({ token }) => {
                   </option>
                   {bonds.map((bond) => (
                     <option key={bond.id} value={bond.id}>
-                      {bond.label}
+                      {bond.description}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          {/* Flaw Selection */}
+          <fieldset className="field">
+            <label className="label">Flaw: </label>
+            <div className="control">
+              <div className="select">
+                <select
+                  name="flaw_id"
+                  value={newCharacter.flaw_id}
+                  required
+                  autoFocus
+                  onChange={changeCharacterState}
+                  disabled={selectedBackground === 0} // Disable until background is selected
+                >
+                  <option value={""} disabled={selectedBackground === 0}>
+                    {selectedBackground === 0
+                      ? "Please select a background first"
+                      : "Please select a flaw"}
+                  </option>
+                  {flaws.map((flaw) => (
+                    <option key={flaw.id} value={flaw.id}>
+                      {flaw.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          {/* Ideal Selection */}
+          <fieldset className="field">
+            <label className="label">Ideal: </label>
+            <div className="control">
+              <div className="select">
+                <select
+                  name="ideal_id"
+                  value={newCharacter.ideal_id}
+                  required
+                  autoFocus
+                  onChange={changeCharacterState}
+                  disabled={selectedBackground === 0} // Disable until background is selected
+                >
+                  <option value={""} disabled={selectedBackground === 0}>
+                    {selectedBackground === 0
+                      ? "Please select a background first"
+                      : "Please select a ideal"}
+                  </option>
+                  {ideals.map((ideal) => (
+                    <option key={ideal.id} value={ideal.id}>
+                      {ideal.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          {/* Personality Trait Selection */}
+          <fieldset className="field">
+            <label className="label">Personality Trait: </label>
+            <div className="control">
+              <div className="select">
+                <select
+                  name="personality_trait_id"
+                  value={newCharacter.personality_trait_id}
+                  required
+                  autoFocus
+                  onChange={changeCharacterState}
+                  disabled={selectedBackground === 0} // Disable until background is selected
+                >
+                  <option value={""} disabled={selectedBackground === 0}>
+                    {selectedBackground === 0
+                      ? "Please select a background first"
+                      : "Please select a personality trait"}
+                  </option>
+                  {personalityTraits.map((personality_trait) => (
+                    <option
+                      key={personality_trait.id}
+                      value={personality_trait.id}
+                    >
+                      {personality_trait.description}
                     </option>
                   ))}
                 </select>
