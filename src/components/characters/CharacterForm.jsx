@@ -7,9 +7,12 @@ import { getAllAlignments } from "../../managers/AlignmentManager";
 import { getAllBackgrounds } from "../../managers/BackgroundManager";
 import { getBondsByBackgroundId } from "../../managers/BondManager";
 import { getAllAbilities } from "../../managers/AbilityManager";
+import { getAllDnDClasses } from "../../managers/DnDClassManager";
 
 export const CharacterForm = ({ token }) => {
   const [newCharacter, setNewCharacter] = useState({});
+  const [classes, setClasses] = useState([]);
+  const [selectedClass, setSelectedClass] = useState(null);
   const [races, setRaces] = useState([]);
   const [alignments, setAlignments] = useState([]);
   const [backgrounds, setBackgrounds] = useState([]);
@@ -21,6 +24,10 @@ export const CharacterForm = ({ token }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    getAllDnDClasses(token).then((classesArray) => {
+      setClasses(classesArray);
+    });
+
     getAllRaces(token).then((racesArray) => {
       setRaces(racesArray);
     });
@@ -58,6 +65,13 @@ export const CharacterForm = ({ token }) => {
     if (e.target.name === "background_id") {
       setSelectedBackground(e.target.value);
     }
+
+    // If the selected field is class, update selectedClass
+    if (e.target.name === "class_id") {
+      const selectedClassId = parseInt(e.target.value);
+      const classDetails = classes.find((cls) => cls.id === selectedClassId);
+      setSelectedClass(classDetails);
+    }
   };
 
   const changeAbilityScore = (abilityId, score) => {
@@ -72,6 +86,7 @@ export const CharacterForm = ({ token }) => {
 
     let character = {
       character_name: newCharacter.character_name,
+      dnd_class_id: parseInt(newCharacter.class_id),
       level: newCharacter.level,
       race_id: parseInt(newCharacter.race_id),
       sex: newCharacter.sex,
@@ -125,6 +140,38 @@ export const CharacterForm = ({ token }) => {
               </div>
             </fieldset>
           </div>
+          {/* Class Selection */}
+          <fieldset className="field">
+            <label className="label">D&D Class: </label>
+            <div className="control">
+              <div className="select">
+                <select
+                  name="class_id"
+                  value={newCharacter.class_id}
+                  required
+                  autoFocus
+                  onChange={changeCharacterState}
+                >
+                  <option value={0}>Please select a D&D class</option>
+                  {classes.map((dndClass) => (
+                    <option key={dndClass.id} value={dndClass.id}>
+                      {dndClass.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          {/* Display additional details based on the selected Class */}
+          {selectedClass && (
+            <div>
+              <h2 className="text-2xl">{selectedClass.label} Details</h2>
+              <p>Description: {selectedClass.description}</p>
+              <p>Primary Ability: {selectedClass.primary_ability}</p>
+              <p>Hit Die: {selectedClass.hit_die}</p>
+              <p>Saving Throw Proficiencies: {selectedClass.saving_throw_prof_1} and {selectedClass.saving_throw_prof_2}</p>
+            </div>
+          )}
           {/* Input Character Level */}
           <div className="mb-2">
             <fieldset className="field">
