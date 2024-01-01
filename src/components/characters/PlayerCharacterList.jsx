@@ -13,8 +13,6 @@ export const PlayerCharactersList = ({ token }) => {
     });
   }, [token, playerId]);
 
-  console.log(characters)
-
   PlayerCharactersList.propTypes = {
     token: PropTypes.string,
   };
@@ -47,12 +45,12 @@ export const PlayerCharactersList = ({ token }) => {
 
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Class:</h2>
-                <h3 className="text-center">{character.dnd_class_label}</h3>
+                <h3 className="text-center">{character.class_label}</h3>
               </div>
 
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Race:</h2>
-                <h3 className="text-center">{character.race}</h3>
+                <h3 className="text-center">{character.race_label.label}</h3>
               </div>
 
               <div className="flex-1 pr-4 border">

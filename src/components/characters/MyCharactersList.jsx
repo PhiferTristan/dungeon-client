@@ -12,8 +12,6 @@ export const MyCharactersList = ({ token }) => {
   const playerId = localStorage.getItem("playerId");
   const navigate = useNavigate();
 
-  console.log(localStorage);
-
   useEffect(() => {
     getAllCharactersByPlayerId(token, playerId).then((charactersArray) => {
       setAllCharacters(charactersArray);

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { deleteUserById, getUserByCurrentUserId } from "../../managers/UserManager";
+import {
+  deleteUserById,
+  getUserByCurrentUserId,
+} from "../../managers/UserManager";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { updateUserStatus } from "../../managers/UserStatusManager";
@@ -70,7 +73,11 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Profile Image:
             </label>
-            <p className="text-gray-700">{user.profile_image_url}</p>
+            <img
+              src={user.profile_image_url}
+              alt="Profile Image"
+              className="text-gray-700"
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -111,17 +118,20 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
               </button>
             )}
             <Link
-              to="parties/mine"
+              to="/parties/mine"
               className="hover:text-red-600 transition border-b-2 border-slate-900 hover:border-red-600 cursor-pointer"
             >
               Parties
             </Link>
-            <Link
-              to="characters/mine"
-              className="hover:text-red-600 transition border-b-2 border-slate-900 hover:border-red-600 cursor-pointer"
-            >
-              Characters
-            </Link>
+            {/* Conditionally render "Characters" link only for non-DM users */}
+            {user.user_type !== "DM" && (
+              <Link
+                to="/characters/mine"
+                className="hover:text-red-600 transition border-b-2 border-slate-900 hover:border-red-600 cursor-pointer"
+              >
+                Characters
+              </Link>
+            )}
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
