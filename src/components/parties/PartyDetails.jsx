@@ -1,17 +1,39 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import { getPartyById } from "../../managers/PartyManager";
+import { deletePartyById, getPartyById } from "../../managers/PartyManager";
+import { HiCog, HiTrash } from "react-icons/hi";
 
 export const PartyDetails = ({ token }) => {
   const [party, setParty] = useState([]);
   const { partyId } = useParams();
+  const navigate = useNavigate();
+  const userType = localStorage.getItem("userType");
 
   useEffect(() => {
     getPartyById(token, partyId).then((party) => {
       setParty(party);
     });
   }, [token, partyId]);
+
+  const handleEditButtonClick = (partyId) => {
+    navigate(`/parties/edit/${partyId}`);
+  };
+
+  const handleDeleteButtonClick = async (partyId) => {
+    const isConfirmed = window.confirm(
+      "Are you positive you want to delete this party?"
+    );
+
+    if (isConfirmed) {
+      try {
+        await deletePartyById(token, partyId).then(() => {});
+        navigate(`/parties/mine`);
+      } catch (error) {
+        console.error("Error deleting party", error);
+      }
+    }
+  };
 
   console.log(party);
 
@@ -39,7 +61,27 @@ export const PartyDetails = ({ token }) => {
 
           {/* Party Name */}
           <h1 className="text-3xl text-center mb-2">{party.name}</h1>
-
+          {/* Conditionally render delete and edit buttons for DM */}
+          <div className="text-center">
+            {userType === "DM" && (
+              <div className="flex-1 border items-center justify-center">
+                <button
+                  onClick={() => handleEditButtonClick(party.id)}
+                  className="hover:text-green-600 transition border-slate-900 border-b-2 hover:border-green-600 cursor-pointer"
+                >
+                  <div className="flex items-center">
+                    <HiCog className="h-7 w-7 mr-1" />
+                  </div>
+                </button>
+                <button
+                  className="hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer"
+                  onClick={() => handleDeleteButtonClick(party.id)}
+                >
+                  <HiTrash className="h-7 w-7" />
+                </button>
+              </div>
+            )}
+          </div>
           {/* Dungeon Master */}
           <div className="bg-white p-4 rounded-md">
             <Link to={`/profiles/details/${party.dungeon_master?.user.id}`}>
@@ -61,9 +103,13 @@ export const PartyDetails = ({ token }) => {
                   {/* Player Username */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Player Username:</h2>
-                    <h3 className="font text-center">
-                      {character.player_user.user.username}
-                    </h3>
+                    <Link
+                      to={`/profiles/details/${character.player_user.user.id}`}
+                    >
+                      <h3 className="font text-center">
+                        {character.player_user.user.username}
+                      </h3>
+                    </Link>
                   </div>
                   {/* Character Name */}
                   <div className="flex-1 pr-4 border">
@@ -77,7 +123,7 @@ export const PartyDetails = ({ token }) => {
                   {/* Character Class */}
                   <div className="flex-1 pr-4 border">
                     <h2 className="text-center">Class:</h2>
-                    <h3 className="text-center">{character.dnd_class_label}</h3>
+                    <h3 className="text-center">{character?.class_label}</h3>
                   </div>
                   {/* Character Race */}
                   <div className="flex-1 border">

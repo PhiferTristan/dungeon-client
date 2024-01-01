@@ -55,12 +55,12 @@ export const deleteCharacter = (token, characterId) => {
 };
 
 export const editCharacter = (character, characterId, token) => {
-  const url = `your_api_url/characters/${characterId}`;
+  const url = `http://localhost:8000/characters/${characterId}`;
   
   return fetch(url, {
     method: 'PUT',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Token ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(character),

@@ -13,6 +13,8 @@ export const CharactersList = ({ token }) => {
     });
   }, [token]);
 
+  console.log(allCharacters)
+
   CharactersList.propTypes = {
     token: PropTypes.string,
   };
@@ -35,17 +37,19 @@ export const CharactersList = ({ token }) => {
 
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Player Username:</h2>
+                <Link to={`/profiles/details/${character?.user_id}`}>
                 <h3 className="font text-center">{character.user_username}</h3>
+                </Link>
               </div>
 
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Class:</h2>
-                <h3 className="text-center">{character.dnd_class_label}</h3>
+                <h3 className="text-center">{character.class_label}</h3>
               </div>
 
               <div className="flex-1 border">
                 <h2 className="text-center">Race:</h2>
-                <h3 className="text-center">{character.race}</h3>
+                <h3 className="text-center">{character.race_label?.label}</h3>
               </div>
 
               <div className="flex-1 border">
