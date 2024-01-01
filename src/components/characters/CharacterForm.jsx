@@ -11,6 +11,7 @@ import { getAllDnDClasses } from "../../managers/DnDClassManager";
 import { getFlawsByBackgroundId } from "../../managers/FlawManager";
 import { getIdealsByBackgroundId } from "../../managers/IdealManager";
 import { getPersonalityTraitsByBackgroundId } from "../../managers/PersonalityTraitManager";
+import { getAllSavingThrows } from "../../managers/SavingThrowsManager";
 
 export const CharacterForm = ({ token }) => {
   const [newCharacter, setNewCharacter] = useState({});
@@ -26,6 +27,7 @@ export const CharacterForm = ({ token }) => {
   const [selectedBackground, setSelectedBackground] = useState(0);
   const [abilities, setAbilities] = useState([]);
   const [abilityScores, setAbilityScores] = useState({});
+  const [savingThrows, setSavingThrows] = useState([])
 
   const navigate = useNavigate();
 
@@ -49,6 +51,10 @@ export const CharacterForm = ({ token }) => {
     getAllAbilities(token).then((abilitiesArray) => {
       setAbilities(abilitiesArray);
     });
+
+    getAllSavingThrows(token).then((savingThrowsArray) => {
+      setSavingThrows(savingThrowsArray)
+    })
   }, [token]);
 
   // Fetch bonds for the selected background
@@ -101,6 +107,13 @@ export const CharacterForm = ({ token }) => {
     });
   };
 
+  const calculateSavingThrowModifier = (abilityScore, level, isProficient) => {
+    const baseModifier = Math.floor((abilityScore - 10) / 2);
+    const proficiencyBonus = isProficient ? Math.ceil(level / 4) + 1 : 0;
+
+    return baseModifier + proficiencyBonus;
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
 
@@ -126,9 +139,6 @@ export const CharacterForm = ({ token }) => {
       navigate(`/characters/mine`);
     });
   };
-
-  console.log("Bonds State:", bonds);
-  console.log("New Character State:", newCharacter);
 
   CharacterForm.propTypes = {
     token: PropTypes.string,
@@ -161,6 +171,56 @@ export const CharacterForm = ({ token }) => {
                 />
               </div>
             </fieldset>
+          </div>
+          {/* Input Character Level */}
+          <div className="mb-2">
+            <fieldset className="field">
+              <label
+                htmlFor="characterLevel"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Character Level:
+              </label>
+              <div>
+                <input
+                  type="text"
+                  id="character_level"
+                  name="level"
+                  autoFocus
+                  value={newCharacter.level}
+                  onChange={changeCharacterState}
+                  className="input mt-1 p-2 border rounded-md w-full"
+                />
+              </div>
+            </fieldset>
+          </div>
+          {/* Abilities Section */}
+          <div className="mb-2">
+            <label className="block text-sm font-medium text-gray-600">
+              Ability Scores:
+            </label>
+            <div className="grid grid-cols-4 gap-4">
+              {abilities.map((ability) => (
+                <div key={ability.id}>
+                  <label className="text-sm font-medium text-gray-600">
+                    {ability.label}:
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="20"
+                    value={abilityScores[ability.id] || ""}
+                    onChange={(e) =>
+                      changeAbilityScore(
+                        ability.id,
+                        parseInt(e.target.value, 10)
+                      )
+                    }
+                    className="input mt-1 p-2 border rounded-md w-full"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           {/* Class Selection */}
           <fieldset className="field">
@@ -197,28 +257,43 @@ export const CharacterForm = ({ token }) => {
               </p>
             </div>
           )}
-          {/* Input Character Level */}
-          <div className="mb-2">
-            <fieldset className="field">
-              <label
-                htmlFor="characterLevel"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Character Level:
-              </label>
-              <div>
-                <input
-                  type="text"
-                  id="character_level"
-                  name="level"
-                  autoFocus
-                  value={newCharacter.level}
-                  onChange={changeCharacterState}
-                  className="input mt-1 p-2 border rounded-md w-full"
-                />
-              </div>
-            </fieldset>
-          </div>
+          {/* Saving Throws */}
+          {/* <div className="saving-throws-container">
+            {savingThrows?.map((savingThrow, index) => {
+              const correspondingAbility =
+                newCharacter.character_abilities.find(
+                  (ability) => ability.ability_id === savingThrow.id
+                );
+
+              const abilityScore = correspondingAbility
+                ? correspondingAbility.score_value
+                : 0;
+
+              const isProficient =
+                selectedClass &&
+                (selectedClass.saving_throw_prof_1 === savingThrow.id ||
+                  selectedClass.saving_throw_prof_2 === savingThrow.id);
+
+              const modifier = calculateSavingThrowModifier(
+                // abilityScore,
+                newCharacter.level,
+                isProficient
+              );
+
+              return (
+                <div key={index} className="saving-throw flex items-center">
+                  <span
+                    className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
+                      isProficient ? "bg-green-500" : "bg-gray-300"
+                    }`}
+                  ></span>
+                  <span className="saving-throw-modifier">
+                    +{modifier} {savingThrow.label} Saving Throw
+                  </span>
+                </div>
+              );
+            })}
+          </div> */}
           {/* Race Selection */}
           <fieldset className="field">
             <label className="label">Race: </label>
@@ -289,34 +364,6 @@ export const CharacterForm = ({ token }) => {
               </div>
             </div>
           </fieldset>
-          {/* Abilities Section */}
-          <div className="mb-2">
-            <label className="block text-sm font-medium text-gray-600">
-              Ability Scores:
-            </label>
-            <div className="grid grid-cols-4 gap-4">
-              {abilities.map((ability) => (
-                <div key={ability.id}>
-                  <label className="text-sm font-medium text-gray-600">
-                    {ability.label}:
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="20"
-                    value={abilityScores[ability.id] || ""}
-                    onChange={(e) =>
-                      changeAbilityScore(
-                        ability.id,
-                        parseInt(e.target.value, 10)
-                      )
-                    }
-                    className="input mt-1 p-2 border rounded-md w-full"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
           {/* Background Selection */}
           <fieldset className="field">
             <label className="label">Background: </label>

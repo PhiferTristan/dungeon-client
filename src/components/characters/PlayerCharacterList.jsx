@@ -13,8 +13,6 @@ export const PlayerCharactersList = ({ token }) => {
     });
   }, [token, playerId]);
 
-  console.log(characters)
-
   PlayerCharactersList.propTypes = {
     token: PropTypes.string,
   };

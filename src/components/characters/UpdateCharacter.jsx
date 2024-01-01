@@ -174,7 +174,6 @@ export const UpdateCharacter = ({ token }) => {
           Edit Character Sheet
         </h1>
         <form className="bg-gray-200 p-4 mb-4 rounded-md" onSubmit={handleSave}>
-          # the top left of character sheet
           {/* Character Name */}
           <fieldset className="">
             <label className="label">Character Name: </label>
@@ -216,6 +215,49 @@ export const UpdateCharacter = ({ token }) => {
               <span>Proficiency Bonus</span>
             </div>
           </div>
+          {/* Abilities Section */}
+          <div className="mb-2">
+            <label className="block text-sm font-medium text-gray-600">
+              Ability Scores:
+            </label>
+            <div className="grid grid-cols-4 gap-4">
+              {abilities.map((ability) => (
+                <div key={ability.id}>
+                  <label className="text-sm font-medium text-gray-600">
+                    {ability.label}:
+                  </label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="20"
+                    value={abilityScores[ability.id] || ""}
+                    onChange={(e) =>
+                      changeAbilityScore(
+                        ability.id,
+                        parseInt(e.target.value, 10)
+                      )
+                    }
+                    className="input mt-1 p-2 border rounded-md w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Previous Ability Scores*/}
+          <div className="abilities-container flex flex-row gap-4">
+            {currentCharacter.character_abilities?.map((ability, index) => (
+              <div
+                className="ability-cube flex flex-col items-center justify-center w-[125px] h-[150px] p-4 bg-slate-300 border border-black rounded-md"
+                key={index}
+              >
+                <span className="ability-label">{ability.ability_label}</span>
+                <span className="ability-score">{ability.score_value}</span>
+                <span className="ability-modifier">
+                  +{calculateAbilityModifier(ability.score_value)}
+                </span>
+              </div>
+            ))}
+          </div>
           {/* Class Selection */}
           <fieldset className="field">
             <label className="label">D&D Class: </label>
@@ -256,8 +298,7 @@ export const UpdateCharacter = ({ token }) => {
             {savingThrows?.map((savingThrow, index) => {
               const correspondingAbility =
                 currentCharacter.character_abilities.find(
-                  (ability) =>
-                    ability.ability_id === savingThrow.id
+                  (ability) => ability.ability_id === savingThrow.id
                 );
 
               const abilityScore = correspondingAbility
@@ -266,12 +307,14 @@ export const UpdateCharacter = ({ token }) => {
 
               const isProficient =
                 selectedClass &&
-                (selectedClass.saving_throw_prof_1 ===
-                  savingThrow.id ||
-                  selectedClass.saving_throw_prof_2 ===
-                    savingThrow.id);
+                (selectedClass.saving_throw_prof_1 === savingThrow.id ||
+                  selectedClass.saving_throw_prof_2 === savingThrow.id);
 
-              const modifier = calculateSavingThrowModifier(abilityScore, currentCharacter.level, isProficient)
+              const modifier = calculateSavingThrowModifier(
+                abilityScore,
+                currentCharacter.level,
+                isProficient
+              );
 
               return (
                 <div key={index} className="saving-throw flex items-center">
@@ -281,11 +324,7 @@ export const UpdateCharacter = ({ token }) => {
                     }`}
                   ></span>
                   <span className="saving-throw-modifier">
-                    +
-                    {modifier}
-                  </span>
-                  <span className="saving-throw-label">
-                    {savingThrow.label} Saving Throw
+                    +{modifier} {savingThrow.label} Saving Throw
                   </span>
                 </div>
               );
@@ -361,49 +400,6 @@ export const UpdateCharacter = ({ token }) => {
               </div>
             </div>
           </fieldset>
-          {/* Abilities Section */}
-          <div className="mb-2">
-            <label className="block text-sm font-medium text-gray-600">
-              Ability Scores:
-            </label>
-            <div className="grid grid-cols-4 gap-4">
-              {abilities.map((ability) => (
-                <div key={ability.id}>
-                  <label className="text-sm font-medium text-gray-600">
-                    {ability.label}:
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="20"
-                    value={abilityScores[ability.id] || ""}
-                    onChange={(e) =>
-                      changeAbilityScore(
-                        ability.id,
-                        parseInt(e.target.value, 10)
-                      )
-                    }
-                    className="input mt-1 p-2 border rounded-md w-full"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Previous Ability Scores*/}
-          <div className="abilities-container flex flex-row gap-4">
-            {currentCharacter.character_abilities?.map((ability, index) => (
-              <div
-                className="ability-cube flex flex-col items-center justify-center w-[125px] h-[150px] p-4 bg-slate-300 border border-black rounded-md"
-                key={index}
-              >
-                <span className="ability-label">{ability.ability_label}</span>
-                <span className="ability-score">{ability.score_value}</span>
-                <span className="ability-modifier">
-                  +{calculateAbilityModifier(ability.score_value)}
-                </span>
-              </div>
-            ))}
-          </div>
           {/* Background Selection */}
           <fieldset className="field">
             <label className="label">Background: </label>
@@ -604,43 +600,6 @@ export const UpdateCharacter = ({ token }) => {
                 />
               </div>
             </fieldset>
-          </div>
-          {/* Saving Throws */}
-          <div className="saving-throws-container">
-            {currentCharacter.character_saving_throws?.map(
-              (savingThrow, index) => {
-                const correspondingAbility =
-                  currentCharacter.character_abilities.find(
-                    (ability) =>
-                      ability.ability_label === savingThrow.saving_throw_label
-                  );
-
-                const abilityScore = correspondingAbility
-                  ? correspondingAbility.score_value
-                  : 0;
-
-                return (
-                  <div key={index} className="saving-throw flex items-center">
-                    <span
-                      className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
-                        savingThrow.proficient ? "bg-green-500" : "bg-gray-300"
-                      }`}
-                    ></span>
-                    <span className="saving-throw-modifier">
-                      +
-                      {calculateSavingThrowModifier(
-                        abilityScore,
-                        currentCharacter.level,
-                        savingThrow.proficient
-                      )}
-                    </span>
-                    <span className="saving-throw-label">
-                      {savingThrow.saving_throw_label}
-                    </span>
-                  </div>
-                );
-              }
-            )}
           </div>
           <div className="field is-grouped">
             <div className="control">

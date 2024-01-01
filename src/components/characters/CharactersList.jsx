@@ -5,15 +5,12 @@ import { getAllCharacters } from "../../managers/CharacterManager";
 
 export const CharactersList = ({ token }) => {
   const [allCharacters, setAllCharacters] = useState([]);
-  console.log(allCharacters);
 
   useEffect(() => {
     getAllCharacters(token).then((charactersArray) => {
       setAllCharacters(charactersArray);
     });
   }, [token]);
-
-  console.log(allCharacters)
 
   CharactersList.propTypes = {
     token: PropTypes.string,

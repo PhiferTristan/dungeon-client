@@ -6,10 +6,13 @@ import {
 } from "../../managers/CharacterManager";
 import PropTypes from "prop-types";
 import { HiTrash, HiCog } from "react-icons/hi";
+import { getAllSavingThrows } from "../../managers/SavingThrowsManager";
+import { getAllDnDClasses } from "../../managers/DnDClassManager";
 
 export const CharacterDetails = ({ token }) => {
   const [character, setCharacter] = useState([]);
-  console.log(character);
+  const [savingThrows, setSavingThrows] = useState([]);
+  const [classes, setClasses] = useState([]);
 
   const { characterId } = useParams();
   const navigate = useNavigate();
@@ -23,8 +26,21 @@ export const CharacterDetails = ({ token }) => {
         .catch((error) => {
           console.error("Error fetching character details:", error);
         });
+
+      getAllSavingThrows(token).then((savingThrowsArray) => {
+        setSavingThrows(savingThrowsArray);
+      });
+
+      getAllDnDClasses(token).then((dndClassesArray) => {
+        setClasses(dndClassesArray);
+      });
     }
   }, [token, characterId]);
+
+  const characterClass = classes.find(
+    (dndClass) => dndClass.id === character.class_id
+  );
+  console.log(character);
 
   const calculateAbilityModifier = (score) => {
     return Math.floor((score - 10) / 2);
@@ -64,10 +80,10 @@ export const CharacterDetails = ({ token }) => {
     <>
       <h1 className="text-center text-4xl text-white">Character Sheet</h1>
       <p className="text-center text-white">Created: {character.created_on}</p>
-      <body className="max-w-2xl mx-auto flex flex-col p-4 bg-white rounded shadow-lg mt-3">
-        <article className="character-sheet flex-row border border-black">
+      <div className="max-w-2xl mx-auto flex flex-col p-4 bg-white rounded shadow-lg mt-3">
+        <div className="character-sheet flex-row border border-black">
           {/* Top of the Character Sheet */} # the top of character sheet
-          <body className="flex flex-row border border-red-600 justify-center">
+          <div className="flex flex-row border border-red-600 justify-center">
             {/* Buttons for Owner */}
             {/* Character Edit */}
             <div className="flex items-center justify-center">
@@ -134,9 +150,9 @@ export const CharacterDetails = ({ token }) => {
                 </div>
               </div>
             </div>
-          </body>
+          </div>
           {/* Next Row */}# the next row
-          <body className="flex flex-row justify-center border border-green-500">
+          <div className="flex flex-row justify-center border border-green-500">
             {/* Character Name */}
             <div className="flex flex-row">
               <div className="">
@@ -185,10 +201,10 @@ export const CharacterDetails = ({ token }) => {
                 </p>
               </div>
             </div>
-          </body>
+          </div>
           #the left side of the character sheet for Abilities
           {/* Abilities */}
-          <div className="abilities-container flex flex-col items-center border border-green-500 h-full">
+          <div className="abilities-container flex flex-row items-center border border-green-500 h-full">
             {character.character_abilities?.map((ability, index) => (
               <div
                 className="ability-cube flex flex-col items-center mt-2 mb-2 justify-center w-[125px] h-[150px] border border-black"
@@ -203,49 +219,137 @@ export const CharacterDetails = ({ token }) => {
             ))}
           </div>
           {/*  */}
-        </article>
+        </div>
         <div className="inspiration-container">
           <span>placeholder: inspo count</span>
           <span>Inspiration</span>
         </div>
-        <div className="proficiency-container">
-          <span>+{calculateProficiencyBonus(character.level)}</span>
-          <span>Proficiency Bonus</span>
-        </div>
-        <div className="saving-throws-container">
-          {character.character_saving_throws?.map((savingThrow, index) => {
-            const correspondingAbility = character.character_abilities.find(
-              (ability) =>
-                ability.ability_label === savingThrow.saving_throw_label
-            );
 
-            const abilityScore = correspondingAbility
-              ? correspondingAbility.score_value
-              : 0;
-
-            return (
-              <div key={index} className="saving-throw flex items-center">
-                <span
-                  className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
-                    savingThrow.proficient ? "bg-green-500" : "bg-gray-300"
-                  }`}
-                ></span>
-                <span className="saving-throw-modifier">
-                  +
-                  {calculateSavingThrowModifier(
-                    abilityScore,
-                    character.level,
-                    savingThrow.proficient
-                  )}
-                </span>
-                <span className="saving-throw-label">
-                  {savingThrow.saving_throw_label}
-                </span>
-              </div>
-            );
-          })}
+        <div className="proficiency-container flex border border-green-500">
+          <div className="border border-black">
+            <span>+{calculateProficiencyBonus(character.level)}</span>
+          </div>
+          <div className="border border-black mr-2 ml-2">
+            <span className="mr-2 ml-2">Proficiency Bonus</span>
+          </div>
         </div>
-      </body>
+
+
+        {/* Saving Throws */}
+        {character.character_abilities && characterClass && (
+          <div className="saving-throws-container border border-red-500">
+            {savingThrows?.map((savingThrow, index) => {
+              const correspondingAbility = character.character_abilities.find(
+                (ability) => ability.ability_id === savingThrow.id
+              );
+
+              const abilityScore = correspondingAbility
+                ? correspondingAbility.score_value
+                : 0;
+
+              const isProficient =
+                characterClass &&
+                (characterClass.saving_throw_prof_1 === savingThrow.id ||
+                  characterClass.saving_throw_prof_2 === savingThrow.id);
+
+              const modifier = calculateSavingThrowModifier(
+                abilityScore,
+                character.level,
+                isProficient
+              );
+
+              return (
+                <div
+                  key={index}
+                  className="saving-throw flex items-center border border-black"
+                >
+                  <span
+                    className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
+                      isProficient ? "bg-green-500" : "bg-gray-300"
+                    }`}
+                  ></span>
+
+                  <span className="saving-throw-modifier">
+                    +{modifier} {savingThrow.label} Saving Throw
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/* Personality Trait */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Personality Trait</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.character_personality_trait?.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+            {/* Ideal */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Ideal</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.character_ideal?.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bond */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Bond</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.character_bond?.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Flaw */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Flaw</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.character_flaw?.description}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Appearance */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Character Appearance</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.character_appearance}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bio/ Backstory */}
+        <div className="flex flex-row border border-green-500">
+          <div className="">
+            <h1 className="text-center">Character Backstory</h1>
+            <div className="text-center">
+              <p className="text-sm mb-2 mr-2 ml-2">
+                {character.bio}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </>
   );
 };
