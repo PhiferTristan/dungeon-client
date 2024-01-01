@@ -45,7 +45,7 @@ export const CharacterDetails = ({ token }) => {
     navigate(`/characters/edit/${characterId}`);
   };
 
-  const handleDelete = (characterId) => {
+  const handleDeleteClick = (characterId) => {
     const confirmDelete = window.confirm(
       "Are you sure you positive you want to delete this character?"
     );
@@ -62,67 +62,148 @@ export const CharacterDetails = ({ token }) => {
 
   return (
     <>
-      <div className="character-container flex flex-col items-center justify-center">
-        <h4 className="text-center text-4xl text-white">Character Sheet</h4># the top left of
-        character sheet
-        <div>
-          <button onClick={() => handleEditClick(characterId)} className="">
-            <div className="flex items-center">
-              <HiCog className="h-7 w-7 mr-1" />
+      <h1 className="text-center text-4xl text-white">Character Sheet</h1>
+      <p className="text-center text-white">Created: {character.created_on}</p>
+      <body className="max-w-2xl mx-auto flex flex-col p-4 bg-white rounded shadow-lg mt-3">
+        <article className="character-sheet flex-row border border-black">
+          {/* Top of the Character Sheet */} # the top of character sheet
+          <body className="flex flex-row border border-red-600 justify-center">
+            {/* Buttons for Owner */}
+            {/* Character Edit */}
+            <div className="flex items-center justify-center">
+              <div className="">
+                <div className="border border-black text-center">
+                  <button
+                    onClick={() => handleEditClick(characterId)}
+                    className="text-2xl mb-2 mr-2 ml-2 hover:text-green-600 transition border-slate-900 border-b-2 hover:border-green-600 cursor-pointer"
+                  >
+                    <HiCog className="h-7 w-7 mr-1" />
+                  </button>
+                  {/* Character Delete */}
+                  <button
+                    className="text-2xl mb-2 mr-2 ml-2 hover:text-red-600 transition border-slate-900 border-b-2 hover:border-red-600 cursor-pointer"
+                    onClick={() => handleDeleteClick(characterId)}
+                  >
+                    <HiTrash className="h-7 w-7" />
+                  </button>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Owner Control
+                </p>
+              </div>
             </div>
-          </button>
-        </div>
-        <div>
-          <button onClick={() => handleDelete(characterId)} className="">
-            <div className="flex items-center">
-              <HiTrash className="h-7 w-7 mr-1" />
+            {/*  */}
+            {/* Class and Level */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">
+                    {character.class_label} {character.level}
+                  </h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Class & Level
+                </p>
+              </div>
             </div>
-          </button>
-        </div>
-        <div>
-          <span>{character.character_name}</span>
-        </div>
-        # the top middle to top right of the character sheet
-        <div>
-          <div>
-            <span>{character.dnd_class_label}</span>
-          </div>
-
-          <div>
-            <span>{character.level}</span>
-          </div>
-
-          <div>
-            <span>{character.user_username}</span>
-          </div>
-
-          <div>
-            <span>{character.race}</span>
-          </div>
-
-          <div>
-            <span>{character.alignment}</span>
-          </div>
-
-          <div>
-            <span>placeholder: exp</span>
-          </div>
-        </div>
-        #the left side of the character sheet for Abilities
-        <div className="abilities-container flex flex-row gap-4">
-          {character.character_abilities?.map((ability, index) => (
-            <div
-              className="ability-cube flex flex-col items-center justify-center w-[125px] h-[150px] p-4 bg-slate-300 border border-black rounded-md"
-              key={index}
-            >
-              <span className="ability-label">{ability.ability_label}</span>
-              <span className="ability-score">{ability.score_value}</span>
-              <span className="ability-modifier">
-                +{calculateAbilityModifier(ability.score_value)}
-              </span>
+            {/* Background */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">
+                    {character.background?.label}
+                  </h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Background
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
+            <div>
+              {/* Player Username */}
+              <div className="flex flex-row">
+                <div className="">
+                  <div className="border border-black text-center">
+                    <h2 className="text-2xl mb-2 mr-2 ml-2">
+                      {character.user_username}
+                    </h2>
+                  </div>
+                  <p className="text-sm text-gray-500 text-center mt-2">
+                    Player
+                  </p>
+                </div>
+              </div>
+            </div>
+          </body>
+          {/* Next Row */}# the next row
+          <body className="flex flex-row justify-center border border-green-500">
+            {/* Character Name */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">
+                    {character.character_name}
+                  </h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Character Name
+                </p>
+              </div>
+            </div>
+            {/* Race */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">
+                    {character.race_label?.label}
+                  </h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">Race</p>
+              </div>
+            </div>
+            {/* Alignment */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">
+                    {character.alignment_id}
+                  </h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Alignment
+                </p>
+              </div>
+            </div>
+            {/* Experience Points */}
+            <div className="flex flex-row">
+              <div className="">
+                <div className="border border-black text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2">10,000</h2>
+                </div>
+                <p className="text-sm text-gray-500 text-center mt-2">
+                  Experience Points
+                </p>
+              </div>
+            </div>
+          </body>
+          #the left side of the character sheet for Abilities
+          {/* Abilities */}
+          <div className="abilities-container flex flex-col items-center border border-green-500 h-full">
+            {character.character_abilities?.map((ability, index) => (
+              <div
+                className="ability-cube flex flex-col items-center mt-2 mb-2 justify-center w-[125px] h-[150px] border border-black"
+                key={index}
+              >
+                <span className="ability-label">{ability.ability_label}</span>
+                <span className="ability-score">{ability.score_value}</span>
+                <span className="ability-modifier">
+                  +{calculateAbilityModifier(ability.score_value)}
+                </span>
+              </div>
+            ))}
+          </div>
+          {/*  */}
+        </article>
         <div className="inspiration-container">
           <span>placeholder: inspo count</span>
           <span>Inspiration</span>
@@ -164,7 +245,7 @@ export const CharacterDetails = ({ token }) => {
             );
           })}
         </div>
-      </div>
+      </body>
     </>
   );
 };

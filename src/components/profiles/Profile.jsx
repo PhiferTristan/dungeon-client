@@ -6,27 +6,29 @@ import { getUserById } from "../../managers/UserManager";
 export const Profile = ({ token }) => {
   const [user, setUser] = useState([]);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { userId } = useParams();
 
   useEffect(() => {
     getUserById(token, userId).then((userObj) => {
       setUser(userObj);
-      console.log(user)
+      console.log(user);
     });
   }, [token, userId]);
 
+  console.log(localStorage)
+
   const handlePlayerCharactersClick = (playerId) => {
-    navigate(`/characters/players_characters/${playerId}`)
-  }
+    navigate(`/characters/players_characters/${playerId}`);
+  };
 
   const handlePlayerPartiesClick = (playerId) => {
-    navigate(`/parties/players_parties/${playerId}`)
-  }
+    navigate(`/parties/players_parties/${playerId}`);
+  };
 
   const handleDMPartiesClick = (dungeonMasterId) => {
-    navigate(`/parties/dms_parties/${dungeonMasterId}`)
-  }
+    navigate(`/parties/dms_parties/${dungeonMasterId}`);
+  };
 
   Profile.propTypes = {
     token: PropTypes.string,
@@ -45,7 +47,11 @@ export const Profile = ({ token }) => {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Profile Image:
             </label>
-            <p className="text-gray-700">{user.profile_image_url}</p>
+            <img
+              src={user.profile_image_url}
+              alt="Profile Image"
+              className="text-gray-700"
+            />
           </div>
           {/* Profile Username */}
           <div className="mb-4">
@@ -66,7 +72,7 @@ export const Profile = ({ token }) => {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Email:
             </label>
-            <p className="text-gray-700">{user.email_address}</p>
+            <p className="text-gray-700">{user.email}</p>
           </div>
           {/* Profile User Type */}
           <div className="mb-4">
@@ -80,14 +86,17 @@ export const Profile = ({ token }) => {
             <div className="mb-4">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => {handlePlayerPartiesClick(user.player_user.id)
+                onClick={() => {
+                  handlePlayerPartiesClick(user.player_user.id);
                 }}
               >
                 Parties
               </button>
               <button
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4"
-                onClick={() => {handlePlayerCharactersClick(user.player_user.id)}}
+                onClick={() => {
+                  handlePlayerCharactersClick(user.player_user.id);
+                }}
               >
                 Characters
               </button>
@@ -97,7 +106,8 @@ export const Profile = ({ token }) => {
             <div className="mb-4">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={() => {handleDMPartiesClick(user.dungeon_master_user.id)
+                onClick={() => {
+                  handleDMPartiesClick(user.dungeon_master_user.id);
                 }}
               >
                 Parties
