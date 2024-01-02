@@ -270,7 +270,7 @@ export const CharacterDetails = ({ token }) => {
         {/* Speed */}
         <div className="proficiency-container flex border border-green-500">
           <div className="border border-black">
-            <span className="mr-2 ml-2">{characterRace.speed}</span>
+            <span className="mr-2 ml-2">{characterRace?.speed}</span>
           </div>
           <div className="border border-black mr-2 ml-2">
             <span className="mr-2 ml-2">Speed</span>
