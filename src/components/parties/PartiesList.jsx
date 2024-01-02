@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { getAllParties, joinParty } from "../../managers/PartyManager";
 import { CharacterModal } from "../characters/CharacterModal";
 
 export const PartiesList = ({ token }) => {
   const [allParties, setAllParties] = useState([]);
-  console.log(localStorage);
   const userType = localStorage.getItem("userType");
   const playerId = localStorage.getItem("playerId");
   const [showCharacterModal, setShowCharacterModal] = useState(false);
   const [selectedCharacterId, setSelectedCharacterId] = useState(null);
   const [selectedPartyId, setSelectedPartyId] = useState(null);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllParties(token).then((partiesArray) => {
@@ -106,6 +107,7 @@ export const PartiesList = ({ token }) => {
               joinParty(token, selectedPartyId, characterId)
                 .then((response) => {
                   // Handle the response as needed
+                  navigate("/parties/mine")
                   console.log(response);
                 })
                 .catch((error) => {

@@ -17,7 +17,6 @@ export const MyPartiesList = ({ token }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("useEffect for MyPartiesList is running");
     // Fetch parties based on user type
     if (userType === "Player" && playerId) {
       getAllPartiesByPlayerId(token, playerId).then((partiesArray) => {
@@ -31,6 +30,8 @@ export const MyPartiesList = ({ token }) => {
       );
     }
   }, [token, userType, playerId, dungeonMasterId]);
+
+  console.log(allParties)
 
   const handleEditButtonClick = (partyId) => {
     navigate(`/parties/edit/${partyId}`);
