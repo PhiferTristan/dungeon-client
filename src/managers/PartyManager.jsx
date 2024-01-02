@@ -17,7 +17,7 @@ export const getPartyById = (token, partyId) => {
 };
 
 export const getAllPartiesByPlayerId = (token, playerId) => {
-  return fetch(`http://localhost:8000/parties/?player_id=${playerId}`, {
+  return fetch(`http://localhost:8000/parties/player/${playerId}`, {
     headers: {
       Authorization: `Token ${token}`,
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const getAllPartiesByPlayerId = (token, playerId) => {
 export const getAllPartiesByDungeonMasterId = (token, dungeonMasterId) => {
   console.log("Fetching parties for Dungeon Master ID:", dungeonMasterId);
   return fetch(
-    `http://localhost:8000/parties/?dungeon_master_id=${dungeonMasterId}`,
+    `http://localhost:8000/parties/dungeon_master/${dungeonMasterId}`,
     {
       headers: {
         Authorization: `Token ${token}`,
