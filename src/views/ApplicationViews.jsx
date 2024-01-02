@@ -57,6 +57,7 @@ export const ApplicationViews = ({
               path="/"
               element={
                 <Homepage
+                  token={token}
                   setToken={setToken}
                   currentUserId={currentUserId}
                   currentUserType={currentUserType}
@@ -88,7 +89,10 @@ export const ApplicationViews = ({
             </Route>
 
             <Route path="dungeonmasters">
-              <Route path="all" element={<DungeonMastersList token={token} />} />
+              <Route
+                path="all"
+                element={<DungeonMastersList token={token} />}
+              />
             </Route>
 
             <Route path="players">
@@ -97,21 +101,42 @@ export const ApplicationViews = ({
 
             <Route path="characters">
               <Route path="all" element={<CharactersList token={token} />} />
-              <Route path="details/:characterId" element={<CharacterDetails token={token} />} />
+              <Route
+                path="details/:characterId"
+                element={<CharacterDetails token={token} />}
+              />
               <Route path="mine" element={<MyCharactersList token={token} />} />
-              <Route path="edit/:characterId" element={<UpdateCharacter token={token} />} />
-              <Route path="players_characters/:playerId" element={<PlayerCharactersList token={token} />} />
+              <Route
+                path="edit/:characterId"
+                element={<UpdateCharacter token={token} />}
+              />
+              <Route
+                path="players_characters/:playerId"
+                element={<PlayerCharactersList token={token} />}
+              />
               <Route path="create" element={<CharacterForm token={token} />} />
             </Route>
 
             <Route path="parties">
-                <Route path="all" element={<PartiesList token={token} />} />
-                <Route path="mine" element={<MyPartiesList token={token} />} />
-                <Route path="details/:partyId" element={<PartyDetails token={token} />} />
-                <Route path="edit/:partyId" element={<UpdateParty token={token} />} />
-                <Route path="create" element={<PartyForm token={token} />} />
-                <Route path="players_parties/:playerId" element={<PlayerPartiesList token={token} />} />
-                <Route path="dms_parties/:dungeonMasterId" element={<DMPartiesList token={token} />} />
+              <Route path="all" element={<PartiesList token={token} />} />
+              <Route path="mine" element={<MyPartiesList token={token} />} />
+              <Route
+                path="details/:partyId"
+                element={<PartyDetails token={token} />}
+              />
+              <Route
+                path="edit/:partyId"
+                element={<UpdateParty token={token} />}
+              />
+              <Route path="create" element={<PartyForm token={token} />} />
+              <Route
+                path="players_parties/:playerId"
+                element={<PlayerPartiesList token={token} />}
+              />
+              <Route
+                path="dms_parties/:dungeonMasterId"
+                element={<DMPartiesList token={token} />}
+              />
             </Route>
           </Route>
         </Routes>

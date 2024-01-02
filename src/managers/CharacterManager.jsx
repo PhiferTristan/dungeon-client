@@ -1,5 +1,5 @@
 export const getMostRecentCharacter = (token, player) => {
-  const characters = player.characters;
+  const characters = player?.characters;
   if (characters && characters.length > 0) {
     return characters[characters.length - 1];
   }
