@@ -102,12 +102,12 @@ export const UpdateCharacter = ({ token }) => {
     return Math.ceil(level / 4) + 1;
   };
 
-  const calculateSavingThrowModifier = (abilityScore, level, isProficient) => {
-    const baseModifier = Math.floor((abilityScore - 10) / 2);
-    const proficiencyBonus = isProficient ? Math.ceil(level / 4) + 1 : 0;
+  // const calculateSavingThrowModifier = (abilityScore, level, isProficient) => {
+  //   const baseModifier = Math.floor((abilityScore - 10) / 2);
+  //   const proficiencyBonus = isProficient ? Math.ceil(level / 4) + 1 : 0;
 
-    return baseModifier + proficiencyBonus;
-  };
+  //   return baseModifier + proficiencyBonus;
+  // };
 
   const changeCharacterState = (e) => {
     setCurrentCharacter({
@@ -294,7 +294,7 @@ export const UpdateCharacter = ({ token }) => {
             </div>
           )}
           {/* Saving Throws */}
-          <div className="saving-throws-container">
+          {/* <div className="saving-throws-container">
             {savingThrows?.map((savingThrow, index) => {
               const correspondingAbility =
                 currentCharacter.character_abilities.find(
@@ -329,7 +329,7 @@ export const UpdateCharacter = ({ token }) => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
           {/* Race Selection */}
           <fieldset className="field">
             <label className="label">Race: </label>

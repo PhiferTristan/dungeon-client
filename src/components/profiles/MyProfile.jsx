@@ -12,8 +12,6 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
 
   const navigate = useNavigate();
 
-  console.log(currentUserId);
-
   useEffect(() => {
     if (currentUserId) {
       getUserByCurrentUserId(token, currentUserId).then((userObj) => {

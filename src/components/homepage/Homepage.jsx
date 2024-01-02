@@ -37,10 +37,8 @@ export const Homepage = ({ token, currentUserType }) => {
     }
   }, [token, currentUserType, playerId, dungeonMasterId]);
 
-  console.log(parties);
   const player = players.find((player) => player.id === playerId);
   const character = getMostRecentCharacter(token, player);
-
   const party = parties[0];
 
   const handleEditButtonClick = (partyId) => {

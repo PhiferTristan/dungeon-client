@@ -6,10 +6,6 @@ import { getMostRecentCharacter } from "../../managers/CharacterManager";
 
 export const PlayersList = ({ token }) => {
   const [allPlayers, setAllPlayers] = useState([]);
-//   const navigate = useNavigate();
-
-  console.log(localStorage);
-  console.log(token);
 
   useEffect(() => {
     getAllPlayers(token).then((playersArray) => {
