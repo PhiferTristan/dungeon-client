@@ -101,17 +101,14 @@ export const PartiesList = ({ token }) => {
           playerId={playerId}
           onSelectCharacter={(characterId) => {
             setSelectedCharacterId(characterId);
-            setShowCharacterModal(false); // Close the modal
-            // Call joinParty after character selection
+            setShowCharacterModal(false);
             if (selectedPartyId) {
               joinParty(token, selectedPartyId, characterId)
                 .then((response) => {
-                  // Handle the response as needed
                   navigate("/parties/mine")
                   console.log(response);
                 })
                 .catch((error) => {
-                  // Handle errors
                   console.error(error);
                 });
             }

@@ -6,7 +6,6 @@ export const ModalCharacterList = ({ token, playerId, onSelectCharacter }) => {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    // Fetch characters based on playerId
     getAllCharactersByPlayerId(token, playerId)
       .then((charactersArray) => {
         setCharacters(charactersArray);

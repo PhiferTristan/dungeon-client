@@ -61,7 +61,6 @@ export const MyPartiesList = ({ token }) => {
         const partyToUpdate = allParties.find((p) => p.id === partyId);
 
         if (partyToUpdate) {
-
           // Check if the characters array is not empty
           if (partyToUpdate.characters && partyToUpdate.characters.length > 0) {
             // Find the character ID for the current player in the party

@@ -108,19 +108,18 @@ export const UpdateCharacter = ({ token }) => {
     };
 
     fetchData();
-  }, [characterId, token]); // Dependency array
+  }, [characterId, token]);
 
   // fetch details when the selected class changes
   useEffect(() => {
     const fetchClassDetails = async () => {
       if (selectedClass) {
-        // Fetch additional details for the selected class
         console.log("class selected");       
       }
     };
 
     fetchClassDetails();
-  }, [selectedClass]); // Dependency array
+  }, [selectedClass]);
 
   const calculateAbilityModifier = (score) => {
     return Math.floor((score - 10) / 2);
@@ -463,7 +462,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -490,7 +489,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -517,7 +516,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -544,7 +543,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
