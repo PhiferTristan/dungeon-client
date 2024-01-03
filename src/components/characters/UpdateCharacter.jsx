@@ -71,6 +71,15 @@ export const UpdateCharacter = ({ token }) => {
         );
         setBonds(bondsArray);
 
+        // Set the initial value for bond_id, flaw_id, ideal_id, personality_trait_id
+        setCurrentCharacter((prevCharacter) => ({
+          ...prevCharacter,
+          bond_id: characterObj.character_bond.id,
+          flaw_id: characterObj.character_flaw.id,
+          ideal_id: characterObj.character_ideal.id,
+          personality_trait_id: characterObj.character_personality_trait.id
+        }));
+
         const flawsArray = await getFlawsByBackgroundId(
           token,
           characterBackgroundId
@@ -89,10 +98,29 @@ export const UpdateCharacter = ({ token }) => {
         );
         setPersonalityTraits(personalityTraitsArray);
       }
+
+      // Fetch details for the initially selected class
+      const selectedClassId = parseInt(characterObj.class_id);
+      const initialSelectedClass = classesArray.find(
+        (cls) => cls.id === selectedClassId
+      );
+      setSelectedClass(initialSelectedClass);
     };
 
     fetchData();
-  }, [characterId, token]);
+  }, [characterId, token]); // Dependency array
+
+  // fetch details when the selected class changes
+  useEffect(() => {
+    const fetchClassDetails = async () => {
+      if (selectedClass) {
+        // Fetch additional details for the selected class
+        console.log("class selected");       
+      }
+    };
+
+    fetchClassDetails();
+  }, [selectedClass]); // Dependency array
 
   const calculateAbilityModifier = (score) => {
     return Math.floor((score - 10) / 2);
