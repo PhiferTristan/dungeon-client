@@ -6,10 +6,6 @@ import { getMostRecentCharacter } from "../../managers/CharacterManager";
 
 export const PlayersList = ({ token }) => {
   const [allPlayers, setAllPlayers] = useState([]);
-//   const navigate = useNavigate();
-
-  console.log(localStorage);
-  console.log(token);
 
   useEffect(() => {
     getAllPlayers(token).then((playersArray) => {
@@ -34,7 +30,7 @@ export const PlayersList = ({ token }) => {
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Username:</h2>
                 <Link to={`/profiles/details/${player.user.id}`}>
-                <h3 className="font text-center">{player.user.username}</h3>
+                <h3 className="font text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">{player.user.username}</h3>
                 </Link>
               </div>
 

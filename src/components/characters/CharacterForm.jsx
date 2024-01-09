@@ -57,7 +57,7 @@ export const CharacterForm = ({ token }) => {
     })
   }, [token]);
 
-  // Fetch bonds for the selected background
+  // Fetch bonds, flaws, ideals, and traits for the selected background
   useEffect(() => {
     if (selectedBackground !== 0) {
       getBondsByBackgroundId(token, selectedBackground).then((bondsArray) => {
@@ -87,12 +87,10 @@ export const CharacterForm = ({ token }) => {
       [e.target.name]: e.target.value,
     });
 
-    // If the selected field is background, update selectedBackground
     if (e.target.name === "background_id") {
       setSelectedBackground(e.target.value);
     }
 
-    // If the selected field is class, update selectedClass
     if (e.target.name === "class_id") {
       const selectedClassId = parseInt(e.target.value);
       const classDetails = classes.find((cls) => cls.id === selectedClassId);

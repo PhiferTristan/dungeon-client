@@ -115,11 +115,11 @@ export const CharacterDetails = ({ token }) => {
       <p className="text-center text-white">Created: {character.created_on}</p>
       <div className="max-w-2xl mx-auto flex flex-col p-4 bg-white rounded shadow-lg mt-3">
         <div className="character-sheet flex-row border border-black">
-          {/* Top of the Character Sheet */} # the top of character sheet
-          <div className="flex flex-row border border-red-600 justify-center">
+          {/* Top of the Character Sheet */}
+          <div className="flex flex-row justify-center">
             {/* Buttons for Owner */}
             {/* Character Edit */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mr-4 p-3">
               <div className="">
                 <div className="border border-black text-center">
                   <button
@@ -143,7 +143,7 @@ export const CharacterDetails = ({ token }) => {
             </div>
             {/*  */}
             {/* Class and Level */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mr-4 p-3">
               <div className="">
                 <div className="border border-black text-center">
                   <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -156,7 +156,7 @@ export const CharacterDetails = ({ token }) => {
               </div>
             </div>
             {/* Background */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mr-4 p-3">
               <div className="">
                 <div className="border border-black text-center">
                   <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -170,7 +170,7 @@ export const CharacterDetails = ({ token }) => {
             </div>
             <div>
               {/* Player Username */}
-              <div className="flex flex-row">
+              <div className="flex flex-row p-3">
                 <div className="">
                   <div className="border border-black text-center">
                     <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -184,10 +184,10 @@ export const CharacterDetails = ({ token }) => {
               </div>
             </div>
           </div>
-          {/* Next Row */}# the next row
-          <div className="flex flex-row justify-center border border-green-500">
+          {/* Next Row */}
+          <div className="flex flex-row justify-center">
             {/* Character Name */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mr-4">
               <div className="">
                 <div className="border border-black">
                   <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -200,7 +200,7 @@ export const CharacterDetails = ({ token }) => {
               </div>
             </div>
             {/* Race */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mr-4">
               <div className="">
                 <div className="border border-black text-center">
                   <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -211,7 +211,7 @@ export const CharacterDetails = ({ token }) => {
               </div>
             </div>
             {/* Alignment */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mr-4">
               <div className="">
                 <div className="border border-black text-center">
                   <h2 className="text-2xl mb-2 mr-2 ml-2">
@@ -226,8 +226,8 @@ export const CharacterDetails = ({ token }) => {
             {/* Experience Points */}
             <div className="flex flex-row">
               <div className="">
-                <div className="border border-black text-center">
-                  <h2 className="text-2xl mb-2 mr-2 ml-2">10,000</h2>
+                <div className="border border-black w-17 h-10 text-center">
+                  <h2 className="text-2xl mb-2 mr-2 ml-2 flex items-center justify-center"></h2>
                 </div>
                 <p className="text-sm text-gray-500 text-center mt-2">
                   Experience Points
@@ -235,212 +235,142 @@ export const CharacterDetails = ({ token }) => {
               </div>
             </div>
           </div>
-          #the left side of the character sheet for Abilities
+          {/* Proficiency */}
+          <div className="proficiency-container flex flex-col items-center justify-center mb-4">
+            <div className="border border-black mb-2">
+              <span className="mr-2 ml-2">
+                +{calculateProficiencyBonus(character.level)}
+              </span>
+              <span className="mr-2 ml-2">Proficiency Bonus</span>
+            </div>
+
+            {/* Speed */}
+            <div className="border border-black">
+              <span className="mr-2 ml-2">{characterRace?.speed}</span>
+              <span className="mr-2 ml-2">Speed</span>
+            </div>
+          </div>
           {/* Abilities */}
-          <div className="abilities-container flex flex-row items-center border border-green-500 h-full">
+          <div className="abilities-container p-4 bg-white rounded shadow-lg">
+          <h1 className="text-center text-xl font-semibold p-2 ">Abilities</h1>
+          <div className="abilities-container flex flex-row items-center h-full rounded shadow-lg ">
             {character.character_abilities?.map((ability, index) => (
               <div
-                className="ability-cube flex flex-col items-center mt-2 mb-2 justify-center w-[125px] h-[150px] border border-black"
+                className="ability-cube flex flex-col items-center mt-2 mb-2 mr-2 ml-2 justify-center w-[125px] h-[150px] border border-black"
                 key={index}
               >
                 <span className="ability-label">{ability.ability_label}</span>
-                <span className="ability-score">{ability.score_value}</span>
+                <span className="ability-score text-xl font-semibold">
+                  {ability.score_value}
+                </span>
                 <span className="ability-modifier">
                   +{calculateAbilityModifier(ability.score_value)}
                 </span>
               </div>
             ))}
           </div>
-          {/*  */}
-        </div>
-        {/* Inspiration */}
-        <div className="inspiration-container">
-          <span>placeholder: inspo count</span>
-          <span>Inspiration</span>
-        </div>
-        {/* Proficiency */}
-        <div className="proficiency-container flex border border-green-500">
-          <div className="border border-black">
-            <span className="mr-2 ml-2">+{calculateProficiencyBonus(character.level)}</span>
           </div>
-          <div className="border border-black mr-2 ml-2">
-            <span className="mr-2 ml-2">Proficiency Bonus</span>
-          </div>
-        </div>
-        {/* Speed */}
-        <div className="proficiency-container flex border border-green-500">
-          <div className="border border-black">
-            <span className="mr-2 ml-2">{characterRace?.speed}</span>
-          </div>
-          <div className="border border-black mr-2 ml-2">
-            <span className="mr-2 ml-2">Speed</span>
-          </div>
-        </div>
-        {/* Saving Throws */}
-        {character.character_abilities && characterClass && (
-          <div className="saving-throws-container border border-red-500">
-            <h1 className="text-center">Saving Throws</h1>
-            {savingThrows?.map((savingThrow, index) => {
-              const correspondingAbility = character.character_abilities.find(
-                (ability) => ability.ability_id === savingThrow.id
-              );
+          {/* Saving Throws */}
+          {character.character_abilities && characterClass && (
+            <div className="saving-throws-container p-4 bg-white rounded shadow-lg">
+              <h1 className="text-center text-xl font-semibold mb-4">
+                Saving Throws
+              </h1>
+              {savingThrows?.map((savingThrow, index) => {
+                const correspondingAbility = character.character_abilities.find(
+                  (ability) => ability.ability_id === savingThrow.id
+                );
 
-              const abilityScore = correspondingAbility
-                ? correspondingAbility.score_value
-                : 0;
+                const abilityScore = correspondingAbility
+                  ? correspondingAbility.score_value
+                  : 0;
 
-              const isProficient =
-                characterClass &&
-                (characterClass.saving_throw_prof_1 === savingThrow.id ||
-                  characterClass.saving_throw_prof_2 === savingThrow.id);
+                const isProficient =
+                  characterClass &&
+                  (characterClass.saving_throw_prof_1 === savingThrow.id ||
+                    characterClass.saving_throw_prof_2 === savingThrow.id);
 
-              const modifier = calculateSavingThrowModifier(
-                abilityScore,
-                character.level,
-                isProficient
-              );
+                const modifier = calculateSavingThrowModifier(
+                  abilityScore,
+                  character.level,
+                  isProficient
+                );
 
-              return (
-                <div
-                  key={index}
-                  className="saving-throw flex items-center border border-black"
-                >
-                  <span
-                    className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
-                      isProficient ? "bg-green-500" : "bg-gray-300"
-                    }`}
-                  ></span>
-
-                  <span className="saving-throw-modifier">
-                    +{modifier} {savingThrow.label} Saving Throw
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-        {/* Personality Trait */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Personality Trait</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">
-                {character.character_personality_trait?.description}
-              </p>
+                return (
+                  <div
+                    key={index}
+                    className="saving-throw flex items-center justify-between p-3 mb-2 border border-black"
+                  >
+                    <span className="saving-throw-label">
+                      {savingThrow.label} Save
+                    </span>
+                    <div className="flex items-center">
+                      <span
+                        className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
+                          isProficient ? "bg-green-500" : "bg-gray-300"
+                        }`}
+                      ></span>
+                      <span className="saving-throw-modifier">+{modifier}</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        </div>
-        {/* Ideal */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Ideal</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">
-                {character.character_ideal?.description}
-              </p>
+          )}
+
+          {/* Skills */}
+          {character.character_skills && characterBackground && (
+            <div className="skills-container p-4 bg-white rounded shadow-lg mt-3">
+              <h1 className="text-center text-xl font-semibold mb-4">Skills</h1>
+              {skills?.map((skill, index) => {
+                const correspondingAbility = character.character_abilities.find(
+                  (ability) => ability.ability_id === skill.ability.id
+                );
+
+                const abilityScore = correspondingAbility
+                  ? correspondingAbility.score_value
+                  : 0;
+
+                const isProficient =
+                  characterBackground &&
+                  (characterBackground.skill_prof_1.id === skill.id ||
+                    characterBackground.skill_prof_2.id === skill.id);
+
+                const modifier = calculateSavingThrowModifier(
+                  abilityScore,
+                  character.level,
+                  isProficient
+                );
+
+                return (
+                  <div
+                    key={index}
+                    className="skill flex flex-row items-center justify-between border border-black p-3 mb-3"
+                  >
+                    <div className="flex items-center">
+                      <span
+                        className={`skill-proficient w-4 h-4 rounded-full mr-2 ${
+                          isProficient ? "bg-green-500" : "bg-gray-300"
+                        }`}
+                      ></span>
+                      <span className="skill-modifier">
+                        +{modifier} {skill.label}
+                      </span>
+                    </div>
+                    <span className="text-xs">
+                      {"( "}
+                      {skill.ability.label}
+                      {" )"}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        </div>
+          )}
 
-        {/* Bond */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Bond</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">
-                {character.character_bond?.description}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Flaw */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Flaw</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">
-                {character.character_flaw?.description}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Appearance */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Character Appearance</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">
-                {character.character_appearance}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Bio/ Backstory */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Character Backstory</h1>
-            <div className="text-center">
-              <p className="text-sm mb-2 mr-2 ml-2">{character.bio}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Skills */}
-        {character.character_skills && characterBackground && (
-          <div className="skills-container border border-red-500">
-            <h1 className="text-center">Skills</h1>
-            {skills?.map((skill, index) => {
-              const correspondingAbility = character.character_abilities.find(
-                (ability) => ability.ability_id === skill.ability.id
-              );
-
-              const abilityScore = correspondingAbility
-                ? correspondingAbility.score_value
-                : 0;
-
-              const isProficient =
-                characterBackground &&
-                (characterBackground.skill_prof_1.id === skill.id ||
-                  characterBackground.skill_prof_2.id === skill.id);
-
-              const modifier = calculateSavingThrowModifier(
-                abilityScore,
-                character.level,
-                isProficient
-              );
-
-              return (
-                <div
-                  key={index}
-                  className="saving-throw flex items-center border border-black"
-                >
-                  <span
-                    className={`saving-throw-proficient w-4 h-4 rounded-full mr-2 ${
-                      isProficient ? "bg-green-500" : "bg-gray-300"
-                    }`}
-                  ></span>
-
-                  <span className="saving-throw-modifier">
-                    +{modifier} {skill.label}
-                  </span>
-                  <span className="text-xs">
-                    {" - ("}
-                    {skill.ability.label}
-                    {")"}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Languages */}
-        <div className="flex flex-row border border-green-500">
-          <div className="">
-            <h1 className="text-center">Languages</h1>
+          {/* Languages */}
+          <div className="languages-container p-4 bg-white rounded shadow-lg mt-3">
+            <h1 className="text-center text-xl underline mb-4">Languages</h1>
             <div className="text-center">
               <p className="text-sm mb-2 mr-2 ml-2">
                 {characterRace?.first_language.label}
@@ -448,6 +378,82 @@ export const CharacterDetails = ({ token }) => {
               <p className="text-sm mb-2 mr-2 ml-2">
                 {characterRace?.second_language.label}
               </p>
+            </div>
+          </div>
+
+          {/* Personality Trait */}
+          <div className="personality-trait-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">
+                Personality Trait
+              </h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">
+                  {character.character_personality_trait?.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Ideal */}
+          <div className="ideal-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">Ideal</h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">
+                  {character.character_ideal?.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bond */}
+          <div className="bond-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">Bond</h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">
+                  {character.character_bond?.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Flaw */}
+          <div className="flaw-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">Flaw</h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">
+                  {character.character_flaw?.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Appearance */}
+          <div className="appearance-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">
+                Character Appearance
+              </h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">
+                  {character.character_appearance}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bio/ Backstory */}
+          <div className="backstory-container flex flex-row bg-white rounded shadow-lg mt-3 justify-center">
+            <div className="">
+              <h1 className="text-center text-xl underline p-2">
+                Character Backstory
+              </h1>
+              <div className="text-center">
+                <p className="text-sm mb-2 mr-2 ml-2">{character.bio}</p>
+              </div>
             </div>
           </div>
         </div>

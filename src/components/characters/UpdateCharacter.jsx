@@ -71,6 +71,15 @@ export const UpdateCharacter = ({ token }) => {
         );
         setBonds(bondsArray);
 
+        // Set the initial value for bond_id, flaw_id, ideal_id, personality_trait_id
+        setCurrentCharacter((prevCharacter) => ({
+          ...prevCharacter,
+          bond_id: characterObj.character_bond.id,
+          flaw_id: characterObj.character_flaw.id,
+          ideal_id: characterObj.character_ideal.id,
+          personality_trait_id: characterObj.character_personality_trait.id
+        }));
+
         const flawsArray = await getFlawsByBackgroundId(
           token,
           characterBackgroundId
@@ -89,10 +98,28 @@ export const UpdateCharacter = ({ token }) => {
         );
         setPersonalityTraits(personalityTraitsArray);
       }
+
+      // Fetch details for the initially selected class
+      const selectedClassId = parseInt(characterObj.class_id);
+      const initialSelectedClass = classesArray.find(
+        (cls) => cls.id === selectedClassId
+      );
+      setSelectedClass(initialSelectedClass);
     };
 
     fetchData();
   }, [characterId, token]);
+
+  // fetch details when the selected class changes
+  useEffect(() => {
+    const fetchClassDetails = async () => {
+      if (selectedClass) {
+        console.log("class selected");       
+      }
+    };
+
+    fetchClassDetails();
+  }, [selectedClass]);
 
   const calculateAbilityModifier = (score) => {
     return Math.floor((score - 10) / 2);
@@ -102,12 +129,12 @@ export const UpdateCharacter = ({ token }) => {
     return Math.ceil(level / 4) + 1;
   };
 
-  const calculateSavingThrowModifier = (abilityScore, level, isProficient) => {
-    const baseModifier = Math.floor((abilityScore - 10) / 2);
-    const proficiencyBonus = isProficient ? Math.ceil(level / 4) + 1 : 0;
+  // const calculateSavingThrowModifier = (abilityScore, level, isProficient) => {
+  //   const baseModifier = Math.floor((abilityScore - 10) / 2);
+  //   const proficiencyBonus = isProficient ? Math.ceil(level / 4) + 1 : 0;
 
-    return baseModifier + proficiencyBonus;
-  };
+  //   return baseModifier + proficiencyBonus;
+  // };
 
   const changeCharacterState = (e) => {
     setCurrentCharacter({
@@ -294,7 +321,7 @@ export const UpdateCharacter = ({ token }) => {
             </div>
           )}
           {/* Saving Throws */}
-          <div className="saving-throws-container">
+          {/* <div className="saving-throws-container">
             {savingThrows?.map((savingThrow, index) => {
               const correspondingAbility =
                 currentCharacter.character_abilities.find(
@@ -329,7 +356,7 @@ export const UpdateCharacter = ({ token }) => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
           {/* Race Selection */}
           <fieldset className="field">
             <label className="label">Race: </label>
@@ -435,7 +462,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -462,7 +489,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -489,7 +516,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0
@@ -516,7 +543,7 @@ export const UpdateCharacter = ({ token }) => {
                   required
                   autoFocus
                   onChange={changeCharacterState}
-                  disabled={selectedBackground === 0} // Disable until background is selected
+                  disabled={selectedBackground === 0}
                 >
                   <option value={""} disabled={selectedBackground === 0}>
                     {selectedBackground === 0

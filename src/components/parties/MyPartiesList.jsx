@@ -31,8 +31,6 @@ export const MyPartiesList = ({ token }) => {
     }
   }, [token, userType, playerId, dungeonMasterId]);
 
-  console.log(allParties)
-
   const handleEditButtonClick = (partyId) => {
     navigate(`/parties/edit/${partyId}`);
   };
@@ -63,9 +61,6 @@ export const MyPartiesList = ({ token }) => {
         const partyToUpdate = allParties.find((p) => p.id === partyId);
 
         if (partyToUpdate) {
-          console.log("Party characters:", partyToUpdate.characters);
-          console.log("Player ID:", playerId);
-
           // Check if the characters array is not empty
           if (partyToUpdate.characters && partyToUpdate.characters.length > 0) {
             // Find the character ID for the current player in the party
@@ -75,9 +70,6 @@ export const MyPartiesList = ({ token }) => {
 
             if (character) {
               const characterId = character.id;
-
-              console.log("Character:", character);
-              console.log("Character ID:", characterId);
 
               await leaveParty(token, partyId, characterId).then(() => {});
             } else {

@@ -73,8 +73,8 @@ export const Register = ({ setToken }) => {
   };
 
   return (
-    <section className="flex items-center justify-center min-h-screen">
-      <form className="w-full max-w-md" onSubmit={handleRegister}>
+    <section className="flex items-center justify-center min-h-screen pt-3">
+      <form className="w-full max-w-md bg-white p-8 shadow-md rounded-md" onSubmit={handleRegister}>
         <h1 className="text-3xl font-bold mb-4 text-center">
           Registration Form
         </h1>
@@ -168,7 +168,7 @@ export const Register = ({ setToken }) => {
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Do you plan to use this application as a Dungeon Master or Player?
+            Do you plan to use this app as a Dungeon Master or Player?
           </label>
           <div className="flex flex-col items-center">
             <div className="mb-2">

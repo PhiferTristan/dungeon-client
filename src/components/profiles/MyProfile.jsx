@@ -12,8 +12,6 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
 
   const navigate = useNavigate();
 
-  console.log(currentUserId);
-
   useEffect(() => {
     if (currentUserId) {
       getUserByCurrentUserId(token, currentUserId).then((userObj) => {
@@ -95,7 +93,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Email:
             </label>
-            <p className="text-gray-700">{user.email_address}</p>
+            <p className="text-gray-700">{user.email}</p>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -123,7 +121,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
             >
               Parties
             </Link>
-            {/* Conditionally render "Characters" link only for non-DM users */}
+            {/* Conditionally render "Characters" link only for Player users */}
             {user.user_type !== "DM" && (
               <Link
                 to="/characters/mine"
@@ -144,31 +142,3 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
     </>
   );
 };
-
-// {
-/* {user.user_type === "DM" ? (
-  <button
-    onClick={handleStatusButtonClick}
-    className={`${
-      user.dungeon_master_user.lfp_status
-        ? "bg-green-500 hover:bg-green-700"
-        : "bg-red-500 hover:bg-red-700"
-    } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-  >
-    {user.dungeon_master_user.lfp_status
-      ? "Disable LFP"
-      : "Enable LFP"}
-  </button>
-) : (
-  <button
-    onClick={handleStatusButtonClick}
-    className={`${
-      user.player_user.lfg_status
-        ? "bg-green-500 hover:bg-green-700"
-        : "bg-red-500 hover:bg-red-700"
-    } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-  >
-    {user.player_user.lfg_status ? "Disable LFG" : "Enable LFG"}
-  </button>
-)} */
-// }
