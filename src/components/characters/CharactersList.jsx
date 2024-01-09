@@ -26,7 +26,7 @@ export const CharactersList = ({ token }) => {
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Character Name:</h2>
                 <Link to={`/characters/details/${character.id}`}>
-                  <h3 className="font text-center">
+                  <h3 className="font text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">
                     {character.character_name}
                   </h3>
                 </Link>
@@ -35,7 +35,7 @@ export const CharactersList = ({ token }) => {
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Player Username:</h2>
                 <Link to={`/profiles/details/${character?.user_id}`}>
-                <h3 className="font text-center">{character.user_username}</h3>
+                <h3 className="font text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">{character.user_username}</h3>
                 </Link>
               </div>
 

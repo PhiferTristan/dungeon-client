@@ -40,14 +40,14 @@ export const PartiesList = ({ token }) => {
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Party Name:</h2>
                 <Link to={`/parties/details/${party.id}`}>
-                  <h3 className="text-center">{party.name}</h3>
+                  <h3 className="text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">{party.name}</h3>
                 </Link>
               </div>
               {/* Dungeon Master */}
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Dungeon Master:</h2>
                 <Link to={`/profiles/details/${party.dungeon_master.user.id}`}>
-                  <h3 className="text-center">
+                  <h3 className="text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">
                     {party.dungeon_master.user.username}
                   </h3>
                 </Link>
@@ -61,7 +61,7 @@ export const PartiesList = ({ token }) => {
                       <Link
                         to={`/profiles/details/${character.player_user.user.id}`}
                       >
-                        {character.player_user.user.username}
+                        <h3 className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">{character.player_user.user.username}</h3>
                       </Link>
                     </li>
                   ))}

@@ -54,7 +54,7 @@ export const MyCharactersList = ({ token }) => {
               <div className="flex-1 pr-4 border">
                 <h2 className="text-center">Character Name:</h2>
                 <Link to={`/characters/details/${character.id}`}>
-                  <h2 className="font text-center">
+                  <h2 className="font text-center hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer">
                     {character.character_name}
                   </h2>
                 </Link>

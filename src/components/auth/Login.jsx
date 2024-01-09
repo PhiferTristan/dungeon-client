@@ -48,8 +48,8 @@ export const Login = ({ setToken }) => {
 
   return (
     <section className="flex items-center justify-center min-h-screen">
-      <form className="w-full max-w-sm" onSubmit={handleLogin}>
-        <h1 className="text-3xl font-bold mb-4">Welcome to Dungeon Docs</h1>
+      <form className="w-full max-w-md bg-white pt-5 pl-7 pr-7 pb-3 shadow-md rounded-md" onSubmit={handleLogin}>
+        <h1 className="text-3xl font-bold mb-4 text-center justify-center">Welcome to Dungeon Docs</h1>
         <p className="text-lg mb-4 text-center">Please sign in</p>
 
         <div className="mb-4">

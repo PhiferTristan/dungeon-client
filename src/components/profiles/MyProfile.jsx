@@ -93,7 +93,7 @@ export const MyProfile = ({ token, currentUserId, currentUserType }) => {
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Email:
             </label>
-            <p className="text-gray-700">{user.email_address}</p>
+            <p className="text-gray-700">{user.email}</p>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">

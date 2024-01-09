@@ -34,7 +34,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="/players/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Players
             </Link>
@@ -42,7 +42,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="parties/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Parties
             </Link>
@@ -50,7 +50,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="parties/mine"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               My Parties
             </Link>
@@ -58,7 +58,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="characters/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Characters
             </Link>
@@ -66,12 +66,12 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="profiles/mine"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Profile
             </Link>
             <button
-              className="button is-outlined hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="button is-outlined hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
               onClick={handleLogout}
             >
               Logout
@@ -86,7 +86,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="dungeonmasters/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Dungeon Masters
             </Link>
@@ -94,7 +94,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="parties/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Parties
             </Link>
@@ -102,7 +102,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="parties/mine"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               My Parties
             </Link>
@@ -110,7 +110,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="characters/all"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Characters
             </Link>
@@ -118,7 +118,7 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="characters/mine"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500cursor-pointer"
             >
               My Characters
             </Link>
@@ -126,12 +126,12 @@ export const NavBar = ({
               spy="true"
               smooth="true"
               to="profiles/mine"
-              className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
             >
               Profile
             </Link>
             <button
-              className="button is-outlined hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+              className="button is-outlined hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
               onClick={handleLogout}
             >
               Logout
@@ -147,7 +147,7 @@ export const NavBar = ({
             spy="true"
             smooth="true"
             to="/register"
-            className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+            className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
           >
             Register
           </Link>
@@ -155,7 +155,7 @@ export const NavBar = ({
             spy="true"
             smooth="true"
             to="/login"
-            className="hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+            className="hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
           >
             Login
           </Link>
@@ -293,7 +293,7 @@ export const NavBar = ({
             spy="true"
             smooth="true"
             to="/"
-            className="text-3xl font-bold hover:text-fuchsia-600 transition border-b-2 border-slate-900 hover:border-fuchsia-600 cursor-pointer"
+            className="text-3xl font-bold hover:text-red-500 transition border-b-2 border-slate-900 hover:border-red-500 cursor-pointer"
           >
             Dungeon Docs
           </Link>
